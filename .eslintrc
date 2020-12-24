@@ -2,6 +2,7 @@
   "extends": ["nextjs"],
   "plugins": ["unused-imports"],
   "rules": {
+    "import/no-unresolved": "off",
     "prettier/prettier": ["error", { "singleQuote": false }],
     "react/jsx-filename-extension": "off",
     "no-unused-vars": "off",
