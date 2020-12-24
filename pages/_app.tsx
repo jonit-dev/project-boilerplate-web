@@ -1,6 +1,8 @@
+import "../styles/globals.css";
 
-import '../styles/globals.css'
-import type { AppProps /*, AppContext */ } from 'next/app'
+
+// eslint-disable-next-line prettier/prettier
+import type { AppProps   } from "next/app"
 
 function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
