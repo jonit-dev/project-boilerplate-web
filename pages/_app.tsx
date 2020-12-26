@@ -1,8 +1,7 @@
 import "../styles/globals.css";
 
-
-// eslint-disable-next-line prettier/prettier
 import type { AppProps   } from "next/app"
+
 
 function App({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />
