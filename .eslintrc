@@ -3,7 +3,7 @@
   "plugins": ["unused-imports"],
   "rules": {
     "import/no-unresolved": "off",
-    "prettier/prettier": ["error", { "singleQuote": false }],
+    "prettier/prettier": "off",
     "react/jsx-filename-extension": "off",
     "no-unused-vars": "off",
     "unused-imports/no-unused-imports": "error",
