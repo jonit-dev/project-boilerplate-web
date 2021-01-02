@@ -1,5 +1,5 @@
 {
-  "extends": ["nextjs", "prettier"],
+  "extends": ["nextjs"],
   "plugins": ["unused-imports"],
   "rules": {
     "import/no-unresolved": "off",
