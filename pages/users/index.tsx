@@ -1,7 +1,8 @@
 import axios from "axios";
 import { GetStaticProps } from "next";
+import Link from "next/link";
 
-import { IUser } from "../types/user.types";
+import { IUser } from "../../types/user.types";
 
 /*#############################################################|
 |  >>> STATICPROPS EXAMPLE
@@ -22,10 +23,19 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default function StaticPropsExample({ users }) {
-  const onRenderUsers = (users: IUser[]) => {
+interface IProps {
+  users: IUser[];
+}
+
+export default function UsersPage({ users }: IProps) {
+  const onRenderUsers = (users) => {
     return users.map((user) => (
       <ul key={user.id}>
+        <li>
+          <Link href={`/users/${user.id}`}>
+            <a>{user.id}</a>
+          </Link>
+        </li>
         <li>{user.name}</li>
         <li>{user.email}</li>
         <li>{user.phone}</li>
