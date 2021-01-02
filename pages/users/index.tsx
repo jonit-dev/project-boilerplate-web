@@ -32,7 +32,7 @@ const UsersPage: NextPage<IProps> = ({ users }) => {
     return users.map((user) => (
       <ul key={user.id}>
         <li>
-           <Link href={`/users/${user.id}`}>
+          <Link href={`/users/${user.id}`}>
             <a>{user.id}</a>
           </Link>
         </li>
@@ -43,6 +43,6 @@ const UsersPage: NextPage<IProps> = ({ users }) => {
     ));
   };
   return <div>{onRenderUsers(users)}</div>;
-}
+};
 
 export default UsersPage;
