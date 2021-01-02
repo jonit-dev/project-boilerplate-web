@@ -10,5 +10,5 @@ const H1 = styled.h1`
 
 export const HomeStyled = {
   Container,
-  H1
+  H1,
 };
