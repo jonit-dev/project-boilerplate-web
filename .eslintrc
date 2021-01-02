@@ -1,3 +1,4 @@
+// SETUP GUIDE: https://decodenatura.com/how-to-set-up-nextjs-typescript-eslint-prettier/
 {
   // Specifies the ESLint parser
   "parser": "@typescript-eslint/parser",
