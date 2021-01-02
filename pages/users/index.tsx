@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Link from "next/link";
 
 import { IUser } from "../../types/user.types";
@@ -27,12 +27,12 @@ interface IProps {
   users: IUser[];
 }
 
-export default function UsersPage({ users }: IProps) {
+const UsersPage: NextPage<IProps> = ({ users }) => {
   const onRenderUsers = (users) => {
     return users.map((user) => (
       <ul key={user.id}>
         <li>
-          <Link href={`/users/${user.id}`}>
+           <Link href={`/users/${user.id}`}>
             <a>{user.id}</a>
           </Link>
         </li>
@@ -42,6 +42,7 @@ export default function UsersPage({ users }: IProps) {
       </ul>
     ));
   };
-
   return <div>{onRenderUsers(users)}</div>;
 }
+
+export default UsersPage;
