@@ -3,27 +3,33 @@ export interface IUser {
   name: string;
   username: string;
   email: string;
-  address: Address;
+  address?: string;
   phone: string;
   website: string;
-  company: Company;
 }
 
-export interface Address {
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: Geo;
+// Redux ========================================
+
+export enum UserActionTypes {
+  loginUser,
+  registerUser,
 }
 
-export interface Geo {
-  lat: string;
-  lng: string;
+export interface IUserCredentials {
+  email: string;
+  password: string;
 }
 
-export interface Company {
-  name: string;
-  catchPhrase: string;
-  bs: string;
+// Actions ========================================
+
+export interface ActionUserLogin {
+  type: UserActionTypes.loginUser;
+  payload: IUser;
 }
+
+export interface ActionUserRegister {
+  type: UserActionTypes.registerUser;
+  payload: IUser;
+}
+
+export type ActionUser = ActionUserLogin | ActionUserRegister;

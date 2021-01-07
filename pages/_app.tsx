@@ -1,9 +1,22 @@
 import "../styles/globals.css";
 
+import { createWrapper } from "next-redux-wrapper";
+import React from "react";
+import { Provider } from "react-redux";
+
+import { store } from "../store/store";
+
 import type { AppProps } from "next/app";
 function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  return (
+    <Provider store={store}>
+      <Component {...pageProps} />
+    </Provider>
+  );
 }
+
+const makeStore = () => store;
+const wrapper = createWrapper(makeStore);
 
 // Only uncomment this method if you have blocking data requirements for
 // every single page in your application. This disables the ability to
@@ -17,4 +30,4 @@ function App({ Component, pageProps }: AppProps) {
 //   return { ...appProps }
 // }
 
-export default App;
+export default wrapper.withRedux(App);
