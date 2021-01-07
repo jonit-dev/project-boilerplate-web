@@ -2,6 +2,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Create a .env file in your folder:
+
+```
+NEXT_PUBLIC_ENV=Development
+NEXT_PUBLIC_APP_NAME=Your app name
+NEXT_PUBLIC_APP_LANGUAGE=eng
+NEXT_PUBLIC_API_URL=http://localhost:3002
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+```
+
 First, run the development server:
 
 ```bash
