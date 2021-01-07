@@ -1,33 +1,22 @@
-import "../styles/globals.css";
+import { useStore } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
-import { createWrapper } from "next-redux-wrapper";
-import React from "react";
-import { Provider } from "react-redux";
+import { wrapper } from "../store/store";
+import { GlobalStyled } from "../styles/global.styles";
 
-import { store } from "../store/store";
-
-import type { AppProps } from "next/app";
-function App({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }) {
+  const store: any = useStore();
   return (
-    <Provider store={store}>
-      <Component {...pageProps} />
-    </Provider>
+    <GlobalStyled.Container suppressHydrationWarning={true}>
+      {process.browser ? (
+        <PersistGate persistor={store.__persistor} loading={<div>Loading</div>}>
+          <Component {...pageProps} />
+        </PersistGate>
+      ) : (
+        <Component {...pageProps} />
+      )}
+    </GlobalStyled.Container>
   );
 }
 
-const makeStore = () => store;
-const wrapper = createWrapper(makeStore);
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext: AppContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-
-//   return { ...appProps }
-// }
-
-export default wrapper.withRedux(App);
+export default wrapper.withRedux(MyApp);
