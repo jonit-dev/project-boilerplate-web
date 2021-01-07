@@ -1,46 +1,35 @@
 import { createWrapper } from "next-redux-wrapper";
 import { applyMiddleware, createStore } from "redux";
-import thunkMiddleware from "redux-thunk";
+import thunk from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.reducer";
 
-// BINDING MIDDLEWARE
-const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== "production") {
-    const { composeWithDevTools } = require("redux-devtools-extension");
-    return composeWithDevTools(applyMiddleware(...middleware));
-  }
-  return applyMiddleware(...middleware);
-};
+const makeConfiguredStore = (reducer) =>
+  createStore(reducer, undefined, applyMiddleware(thunk));
 
-const makeStore = ({ isServer }) => {
+const makeStore = () => {
+  const isServer = typeof window === "undefined";
+
   if (isServer) {
-    //If it's on server side, create a store
-    return createStore(rootReducer, bindMiddleware([thunkMiddleware]));
+    return makeConfiguredStore(rootReducer);
   } else {
-    //If it's on client side, create a store which will persist
+    // we need it only on client side
     const { persistStore, persistReducer } = require("redux-persist");
     const storage = require("redux-persist/lib/storage").default;
 
     const persistConfig = {
       key: "nextjs",
-      whitelist: ["userReducer"], // only counter will be persisted, add other reducers if needed
-      storage, // if needed, use a safer storage
+      whitelist: ["userReducer"], // make sure it does not clash with server keys
+      storage,
     };
 
-    const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
+    const persistedReducer = persistReducer(persistConfig, rootReducer);
+    const store: any = makeConfiguredStore(persistedReducer);
 
-    const store: any = createStore(
-      persistedReducer,
-      bindMiddleware([thunkMiddleware])
-    ); // Creating the store again
-
-    store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+    store.__persistor = persistStore(store); // Nasty hack
 
     return store;
   }
 };
 
-// Export the wrapper & wrap the pages/_app.js with this wrapper only
-//@ts-expect-error missing types
 export const wrapper = createWrapper(makeStore);
