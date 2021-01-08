@@ -1,12 +1,11 @@
 // pages/_app.tsx
-import "../styles/scss/styles.scss";
-
 import React from "react";
 import { Provider, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { wrapper } from "../store/store";
 import { GlobalStyled } from "../styles/global.styles";
+
 
 export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
