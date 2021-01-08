@@ -1,9 +1,12 @@
 import Head from "next/head";
 import React from "react";
 
+import { CTASection } from "../components/landing/CTASection";
 import { FeaturesSection } from "../components/landing/FeaturesSection";
+import { Footer } from "../components/landing/Footer";
 import { Header } from "../components/landing/Header";
 import { HeroBanner } from "../components/landing/HeroBanner";
+import { PricingSection } from "../components/landing/PricingSection";
 import { app } from "../constants/env";
 
 export default function Home() {
@@ -29,7 +32,10 @@ export default function Home() {
         <main>
           <HeroBanner />
           <FeaturesSection />
+          <PricingSection />
+          <CTASection />
         </main>
+        <Footer />
       </div>
     </React.Fragment>
   );
