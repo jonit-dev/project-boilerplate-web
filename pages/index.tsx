@@ -1,35 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
-
-import { userLogin } from "../store/actions/user.action";
-import { StoreState } from "../store/reducers/index.reducer";
-import { IUserReducer } from "../store/reducers/user.reducer";
-import { HomeStyled } from "../styles/home.styles";
+import Head from "next/head";
 
 export default function Home() {
-  const dispatch = useDispatch();
-
-  const { user } = useSelector<StoreState, IUserReducer>(
-    (state) => state.userReducer
-  );
-
-  const onClickCheckRedux = () => {
-    dispatch(userLogin({ email: "test", password: "123" }));
-  };
-
   return (
-    <HomeStyled.Container>
-      <HomeStyled.H1>NextJS Boilerplate</HomeStyled.H1>
-
-      <h1>User (Redux test)</h1>
-
-      {user && JSON.stringify(user)}
-
-      <p>
-        Click the button below to load all user info, making sure that Redux is
-        working properly!
-      </p>
-
-      <button onClick={onClickCheckRedux}>Check redux</button>
-    </HomeStyled.Container>
+    <>
+      <Head>
+        <link
+          href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600"
+          rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/landing/css/style.css"></link>
+        <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+        <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+      </Head>
+      <div className="is-boxed has-animations">
+        <h1>Hi there</h1>
+        <script src="/landing/main.js"></script>
+      </div>
+    </>
   );
 }

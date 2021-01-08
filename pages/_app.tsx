@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { wrapper } from "../store/store";
 import { GlobalStyled } from "../styles/global.styles";
 
+
 export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
   return (
