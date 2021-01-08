@@ -1,12 +1,14 @@
-(function () {
+document.addEventListener('DOMContentLoaded', () => {
+ setTimeout(() => {
   const win = window
   const doc = document.documentElement
-
+ 
   doc.classList.remove('no-js')
   doc.classList.add('js')
 
   // Reveal animations
   if (document.body.classList.contains('has-animations')) {
+    console.log('body has animations');
     /* global ScrollReveal */
     const sr = window.sr = ScrollReveal()
 
@@ -68,4 +70,6 @@
       easing: 'easeInOutExpo'
     })
   }
-}())
+        
+ },1000)
+});
