@@ -41,7 +41,8 @@
     // needed for NextJS's jsx without react import
     "react/react-in-jsx-scope": "off",
     "@typescript-eslint/no-var-requires": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/ban-types": "off"
   },
   "globals": { "React": "writable" }
 }
