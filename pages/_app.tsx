@@ -1,19 +1,16 @@
+import "../styles/scss/style.scss";
+
 import { useRouter } from "next/dist/client/router";
 import React, { useEffect } from "react";
 import { Provider, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import { tailwindExcludePaths } from "../constants/tailwind";
 import { wrapper } from "../store/store";
 import { Global__ } from "../styles/global.styles";
 
 // pages/_app.tsx
 export default wrapper.withRedux(({ Component, pageProps }) => {
   const router = useRouter();
-
-  if (!tailwindExcludePaths.includes(router.pathname)) {
-    require("tailwindcss/tailwind.css");
-  }
 
   const store: any = useStore();
   return (
