@@ -8,28 +8,50 @@ export interface IUser {
   website: string;
 }
 
-// Redux ========================================
+export interface IUserCredentials {
+  email: string;
+  password: string;
+}
 
 export enum UserActionTypes {
   loginUser,
   registerUser,
 }
 
-export interface IUserCredentials {
-  email: string;
-  password: string;
+export interface IUserAccessToken {
+  accessToken: string;
 }
 
-// Actions ========================================
+export enum UserActionTypes {
+  Register = "Register",
+  Login = "Login",
+  RefreshInfo = "RefreshInfo",
+  Logout = "Logout",
+}
 
-export interface ActionUserLogin {
-  type: UserActionTypes.loginUser;
+// Dispatch actions
+
+export interface IDispatchUserInfo {
+  type: UserActionTypes.RefreshInfo;
   payload: IUser;
 }
 
-export interface ActionUserRegister {
-  type: UserActionTypes.registerUser;
-  payload: IUser;
+export interface IDispatchUserLogin {
+  type: UserActionTypes.Login;
+  payload: IUserAccessToken;
 }
 
-export type ActionUser = ActionUserLogin | ActionUserRegister;
+export interface IDispatchUserLogout {
+  type: UserActionTypes.Logout;
+}
+
+export interface IDispatchUserRegister {
+  type: UserActionTypes.Register;
+}
+
+// this is used inside our reducer
+export type UserAction =
+  | IDispatchUserRegister
+  | IDispatchUserLogin
+  | IDispatchUserInfo
+  | IDispatchUserLogout;

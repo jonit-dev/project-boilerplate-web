@@ -1,17 +1,18 @@
-import { IUser, IUserCredentials, UserActionTypes } from "../../types/user.types";
+import { Dispatch } from "react";
 
-export const userLogin = (credentials: IUserCredentials) => {
-  const user: IUser = {
-    id: 1,
-    name: "John",
-    username: "johndoe",
-    email: "johndoe@gmail.com",
-    phone: "444121231",
-    website: "https://jsonplaceholder.typicode.com/users",
-  };
+import { APIHelper } from "../../libs/APIHelper";
+import { IDispatchUserLogin, IUserAccessToken, IUserCredentials, UserActionTypes } from "../../types/user.types";
 
-  return {
-    type: UserActionTypes.loginUser,
-    payload: user,
-  };
+export const userLogin = (credentials: IUserCredentials) => async (
+  dispatch: Dispatch<IDispatchUserLogin>
+) => {
+  const response = await APIHelper.apiRequest<IUserAccessToken>(
+    "GET",
+    "/auth/signin",
+    credentials
+  );
+  dispatch({
+    type: UserActionTypes.Login,
+    payload: response.data,
+  });
 };
