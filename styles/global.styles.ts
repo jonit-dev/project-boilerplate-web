@@ -2,6 +2,6 @@ import styled from "styled-components";
 
 const Container = styled.div``;
 
-export const GlobalStyled = {
+export const Global__ = {
   Container,
 };

@@ -8,7 +8,7 @@ const H1 = styled.h1`
   color: blueviolet;
 `;
 
-export const HomeStyled = {
+export const Home__ = {
   Container,
   H1,
 };
