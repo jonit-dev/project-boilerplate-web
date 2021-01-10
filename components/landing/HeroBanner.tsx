@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const HeroBanner: React.FC = () => {
@@ -12,12 +13,12 @@ export const HeroBanner: React.FC = () => {
               to set it up once, and get beautiful results forever.
             </p>
             <div className="hero-cta">
-              <a className="button button-primary" href="#">
-                Pre order now
-              </a>
-              <a className="button" href="#">
-                Get in touch
-              </a>
+              <Link href="/register">
+                <a className="button button-primary">Register</a>
+              </Link>
+              <Link href="/login">
+                <a className="button">Login</a>
+              </Link>
             </div>
           </div>
           <div className="hero-figure anime-element">

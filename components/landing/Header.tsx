@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 export const Header: React.FC = () => {
@@ -7,13 +8,15 @@ export const Header: React.FC = () => {
         <div className="site-header-inner">
           <div className="brand header-brand">
             <h1 className="m-0">
-              <a href="#">
-                <img
-                  className="header-logo-image"
-                  src="/landing/images/logo.svg"
-                  alt="Logo"
-                />
-              </a>
+              <Link href="/">
+                <a>
+                  <img
+                    className="header-logo-image"
+                    src="/landing/images/logo.svg"
+                    alt="Logo"
+                  />
+                </a>
+              </Link>
             </h1>
           </div>
         </div>
