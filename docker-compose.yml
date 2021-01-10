@@ -10,4 +10,4 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - "3000:3000"
+      - "${NEXT_PUBLIC_APP_PORT}:${NEXT_PUBLIC_APP_PORT}"
