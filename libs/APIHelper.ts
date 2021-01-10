@@ -18,7 +18,7 @@ export class APIHelper {
     method: AxiosRequestConfig["method"],
     url: string,
     data?: object | null,
-    authenticated: boolean = true
+    authenticated = true
   ): Promise<AxiosResponse<T>> {
     const userReducer = store.getState().userReducer;
 
