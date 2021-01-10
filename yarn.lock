@@ -310,6 +310,11 @@
   resolved "https://registry.yarnpkg.com/@opentelemetry/context-base/-/context-base-0.14.0.tgz#c67fc20a4d891447ca1a855d7d70fa79a3533001"
   integrity sha512-sDOAZcYwynHFTbLo6n8kIbLiVF3a3BLkrmehJUyEbT9F+Smbi47kLGS2gG2g0fjBLR/Lr1InPD7kXL7FaTqEkw==
 
+"@project-boilerplate/shared@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@project-boilerplate/shared/-/shared-1.0.2.tgz#010f6b186eba944fad319c6723785af5aa6eeeca"
+  integrity sha512-aIEmtgpenTdRlBRWOEdmdMQ05NBrURzt2GFQgKairQNaohFd41MPzwVWQjiFubqswVkAcnr8pJEGX/wI4jpucQ==
+
 "@types/axios@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@types/axios/-/axios-0.14.0.tgz#ec2300fbe7d7dddd7eb9d3abf87999964cafce46"
