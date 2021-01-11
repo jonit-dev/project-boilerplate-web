@@ -1,13 +1,18 @@
 export const theme = {
   colors: {
-    primary: "#0D85F6",
-    secondary: "#02CBB1",
-    dark: "#1E2128",
+    primary: "#4950F6",
+    secondary: "#FF5273",
+    tertiary: "#2F2BC6",
+    dark: "#181743",
     mediumGray: "#8A94A7",
     darkGray: "#434853",
     lightGray: "#EEF1FA",
+    success: "#1ADAB7",
+    warning: "#DB5D45",
+    info: "#2F2BC6",
   },
   typography: {
-    baseFont: "IBM Plex Sans",
+    primary: "Fira Sans, serif",
+    secondary: "Heebo, sans-serif",
   },
 };

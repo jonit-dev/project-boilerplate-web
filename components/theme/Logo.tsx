@@ -6,7 +6,9 @@ import styled from "styled-components";
 export const Logo: React.FC = () => {
   return (
     <Link href="/">
-      <Image src="/logo.svg" width={32} height={32} />
+      <a>
+        <Image src="/logo.svg" width={32} height={32} />
+      </a>
     </Link>
   );
 };

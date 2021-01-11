@@ -79,9 +79,7 @@ export const Header: React.FC<IProps> = ({ variant = "relative" }) => {
         <div className="site-header-inner">
           <div className="brand header-brand">
             <h1 className="m-0">
-              <a href="#">
-                <Logo />
-              </a>
+              <Logo />
             </h1>
           </div>
         </div>

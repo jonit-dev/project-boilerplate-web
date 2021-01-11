@@ -27,14 +27,17 @@ export default function LoginPage() {
           <form>
             <Input
               id="login-email"
+              type="email"
               label="Email"
               onChange={(e) =>
                 setCredentials({ ...credentials, email: e.target.value })
               }
+              placeholder="john@gmail.com"
             />
 
             <Input
               id="loginpassword"
+              type="password"
               label="Password"
               onChange={(e) =>
                 setCredentials({ ...credentials, password: e.target.value })

@@ -4,7 +4,7 @@ import React from "react";
 interface IProps {
   href?: string;
   text: string;
-  variant: "primary" | "secondary";
+  variant?: "primary" | "secondary";
   onClick?: () => void;
 }
 

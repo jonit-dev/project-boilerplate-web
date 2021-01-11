@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Button } from "../theme/Button";
+
 export const HeroSection: React.FC = () => {
   return (
     <section className="hero">
@@ -12,18 +14,8 @@ export const HeroSection: React.FC = () => {
               to set it up once, and get beautiful results forever.
             </p>
             <div className="hero-form field field-grouped">
-              <div className="control control-expanded">
-                <input
-                  className="input"
-                  type="email"
-                  name="email"
-                  placeholder="Your best email…"
-                />
-              </div>
               <div className="control">
-                <a className="button button-primary button-block" href="#">
-                  Early access
-                </a>
+                <Button text="Login" href="/login" />
               </div>
             </div>
           </div>

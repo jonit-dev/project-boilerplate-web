@@ -8,9 +8,7 @@ export const Footer: React.FC = (props) => {
       <div className="container">
         <div className="site-footer-inner has-top-divider">
           <div className="brand footer-brand">
-            <a href="#">
-              <Logo />
-            </a>
+            <Logo />
           </div>
           <ul className="footer-links list-reset">
             <li>
