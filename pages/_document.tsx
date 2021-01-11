@@ -32,7 +32,12 @@ class MyDocument extends Document {
   public render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <link
+            href="https://fonts.googleapis.com/css?family=Heebo:400,500,700|Fira+Sans:600"
+            rel="stylesheet"
+          />
+        </Head>
         <body className="is-boxed has-animations">
           <Main />
           <NextScript />

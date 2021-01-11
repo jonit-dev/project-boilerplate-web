@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header__ } from "../../styles/theme/header.styles";
+import { Header__ } from "../../styles/components/header.styles";
 import { Logo } from "../theme/Logo";
 
 interface IProps {
@@ -11,6 +11,7 @@ export const Header: React.FC<IProps> = ({ variant = "relative" }) => {
   return (
     <Header__.Container
       className={variant === "relative" ? "site-header" : "site-header-static"}
+      variant={variant}
     >
       {variant === "relative" && (
         <>

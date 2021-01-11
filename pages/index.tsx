@@ -17,17 +17,14 @@ export default function Home() {
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{app.general.name}</title>
-        <link
-          href="https://fonts.googleapis.com/css?family=Heebo:400,500,700|Fira+Sans:600"
-          rel="stylesheet"
-        />
+
         <script src="https://unpkg.com/animejs@2.2.0/anime.min.js"></script>
         <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
         <script src="/landing/js/main.js"></script>
       </Head>
 
       <div className="body-wrap boxed-container">
-        <Header />
+        <Header variant="relative" />
         <main>
           <HeroSection />
           <FeaturesSection />
