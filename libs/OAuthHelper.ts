@@ -1,4 +1,4 @@
-import { HttpStatus, IGoogleOAuthUrlResponse } from "@little-sentinel/shared";
+import { HttpStatus, IGoogleOAuthUrlResponse } from "@project-boilerplate/shared";
 
 import { APIHelper } from "./APIHelper";
 

@@ -1,8 +1,7 @@
-import { TextHelper } from '@little-sentinel/shared';
-import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { TextHelper } from "@project-boilerplate/shared";
+import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
-import { apiAxios } from '../constants/axios.constants';
-import { store } from '../store/persist.store';
+import { apiAxios } from "../constants/axios.constants";
 
 export class APIHelper {
   public static async request<T>(
@@ -20,20 +19,19 @@ export class APIHelper {
     data?: object | null,
     authenticated = true
   ): Promise<AxiosResponse<T>> {
-    const userReducer = store.getState().userReducer;
+    // if (authenticated) {
+    //   const userReducer = store.getState().userReducer;
 
-    const { token } = userReducer.user;
-
-    if (authenticated) {
-      return apiAxios.request<T>({
-        method,
-        url,
-        data,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    }
+    //   const { token } = userReducer.user;
+    //   return apiAxios.request<T>({
+    //     method,
+    //     url,
+    //     data,
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   });
+    // }
 
     return apiAxios.request<T>({ method, url, data });
   }

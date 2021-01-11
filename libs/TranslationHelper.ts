@@ -1,6 +1,6 @@
-import { TranslationTypes } from '@little-sentinel/shared';
+import { TranslationTypes } from "@project-boilerplate/shared";
 
-import { appEnv } from '../constants/env';
+import { appEnv } from "../constants/env";
 
 interface IInterpolationObjs {
   [key: string]: string;
@@ -14,7 +14,7 @@ export class TS {
   ) {
     const envLang = appEnv.language!;
 
-    const jsonFile = require(`../../node_modules/@little-sentinel/shared/src/translations/${context}.lang.json`);
+    const jsonFile = require(`../../node_modules/@project-boilerplate/shared/src/translations/${context}.lang.json`);
 
     let translatedString: string;
 
