@@ -13,12 +13,6 @@ COPY yarn.lock /usr/src/app
 
 RUN yarn install --frozen-lockfile
 
-COPY . .
-
-# Building app
-RUN npm run build
 
 EXPOSE 3003
-
-# Running the app
-CMD [ "npm", "start" ]
+CMD ["npm", "run", "dev"]
