@@ -1,12 +1,12 @@
 import Head from "next/head";
 import React from "react";
 
-import { CTASection } from "../components/landing/CTASection";
 import { FeaturesSection } from "../components/landing/FeaturesSection";
 import { Footer } from "../components/landing/Footer";
 import { Header } from "../components/landing/Header";
-import { HeroBanner } from "../components/landing/HeroBanner";
-import { PricingSection } from "../components/landing/PricingSection";
+import { HeroSection } from "../components/landing/HeroSection";
+import { NewsletterSection } from "../components/landing/NewsletterSection";
+import { TestimonialsSection } from "../components/landing/TestimonialsSection";
 import { app } from "../constants/env";
 
 export default function Home() {
@@ -18,21 +18,21 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{app.general.name}</title>
         <link
-          href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600"
+          href="https://fonts.googleapis.com/css?family=Heebo:400,500,700|Fira+Sans:600"
           rel="stylesheet"
         />
-        <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
+        <script src="https://unpkg.com/animejs@2.2.0/anime.min.js"></script>
         <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
-        <script src="/landing/main.js"></script>
+        <script src="/landing/js/main.js"></script>
       </Head>
 
-      <div className="body-wrap">
+      <div className="body-wrap boxed-container">
         <Header />
         <main>
-          <HeroBanner />
+          <HeroSection />
           <FeaturesSection />
-          <PricingSection />
-          <CTASection />
+          <TestimonialsSection />
+          <NewsletterSection />
         </main>
         <Footer />
       </div>
