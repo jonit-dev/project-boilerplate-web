@@ -1,0 +1,29 @@
+.form-control {
+  background-color: #FFFFFF;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #D2DAF0;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  color: #565678;
+  max-width: 100%;
+  width: 100%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  font-size: 16px;
+  letter-spacing: -0.1px;
+  line-height: 20px;
+  padding: 13px 16px;
+  height: 48px;
+  -moz-box-shadow: none;
+  box-shadow: none;
+
+  &::placeholder {
+    color: #D2DAF0;
+  }
+}
+
+.form-label {
+  font-size: 0.8rem;
+  color: $dark;
+}
