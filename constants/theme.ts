@@ -5,6 +5,7 @@ export const theme = {
     dark: "#1E2128",
     mediumGray: "#8A94A7",
     darkGray: "#434853",
+    lightGray: "#EEF1FA",
   },
   typography: {
     baseFont: "IBM Plex Sans",
