@@ -1,6 +1,8 @@
 import { HttpStatus } from "@project-boilerplate/shared/dist";
 import axios from "axios";
 
+import { TS } from "../libs/TranslationHelper";
+import { showAlert } from "../store/actions/ui.action";
 import { userLogout } from "../store/actions/user.action";
 import { IUserReducer } from "../store/reducers/user.reducer";
 import { store } from "../store/store";
@@ -17,25 +19,16 @@ apiAxios.interceptors.response.use(
   },
   (error) => {
     // First check should be if the server is actually online. If not, show error and send him to login
-
     if (!error.response) {
-      //!Refactor!
-      // store.dispatch(
-      //   showAlert(
-      //     TS.translate("global", "oops"),
-      //     "Couldn't connect to the server. Please, check your internet connection!"
-      //   )
-      // );
-      alert(
-        "Couldn't connect to the server. Please, check your internet connection!"
+      store.dispatch(
+        showAlert(
+          TS.translate("global", "oops"),
+          TS.translate("global", "connectionError")
+        )
       );
 
       //Clear user info and force a logout by redirecting him to auth
       store.dispatch(userLogout());
-
-      if (!window.location.href.includes("login")) {
-        window.location.href = "/login";
-      }
 
       return;
     }
@@ -52,17 +45,13 @@ apiAxios.interceptors.response.use(
           case HttpStatus.Unauthorized:
           case HttpStatus.Forbidden:
             if (!errorResponse.message.includes("Invalid credentials")) {
-              // store.dispatch(
-              //   showAlert(
-              //     TS.translate("auth", "pleaseLogin"),
-              //     TS.translate("auth", "couldntAuthenticate")
-              //   )
-              // );
-              alert("Invalid credentials! Please login again.");
+              store.dispatch(
+                showAlert(
+                  TS.translate("auth", "pleaseLogin"),
+                  TS.translate("auth", "couldntAuthenticate")
+                )
+              );
               store.dispatch(userLogout());
-              if (!window.location.href.includes("login")) {
-                window.location.href = "/login";
-              }
             }
 
             break;

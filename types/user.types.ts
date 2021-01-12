@@ -27,7 +27,7 @@ export enum UserActionTypes {
   Register = "Register",
   Login = "Login",
   RefreshInfo = "RefreshInfo",
-  Logout = "Logout",
+  Clear = "Clear",
 }
 
 // Dispatch actions
@@ -42,8 +42,8 @@ export interface IDispatchUserLogin {
   payload: IUserLoginPayload;
 }
 
-export interface IDispatchUserLogout {
-  type: UserActionTypes.Logout;
+export interface IDispatchUserClear {
+  type: UserActionTypes.Clear;
 }
 
 export interface IDispatchUserRegister {
@@ -55,4 +55,4 @@ export type UserAction =
   | IDispatchUserRegister
   | IDispatchUserLogin
   | IDispatchUserInfo
-  | IDispatchUserLogout;
+  | IDispatchUserClear;

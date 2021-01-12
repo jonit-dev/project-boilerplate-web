@@ -1,11 +1,12 @@
+import Router from "next/router";
 import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
 import { IAPIError } from "../../types/api.types";
 import { IDispatchAlertShow } from "../../types/ui.types";
 import {
+  IDispatchUserClear,
   IDispatchUserLogin,
-  IDispatchUserLogout,
   IUserCredentials,
   IUserLoginPayload,
   UserActionTypes,
@@ -30,7 +31,7 @@ export const userLogin = (credentials: IUserCredentials) => async (
       payload: loginSuccessPayload,
     });
 
-    window.location.href = "/main";
+    Router.route = "/main";
   } catch (error) {
     // If it's a custom error message from the server, let's handle it!
 
@@ -39,15 +40,24 @@ export const userLogin = (credentials: IUserCredentials) => async (
 
       const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
 
-      dispatch(showAlert("Oops!", errorMessage, "danger"));
+      dispatch(showAlert("Oops!", errorMessage));
     }
   }
 };
 
-export const userLogout = (): IDispatchUserLogout => {
-  console.log("Logging out and clearing user data...");
+export const userClearInfo = (): IDispatchUserClear => {
+  return {
+    type: UserActionTypes.Clear,
+  };
+};
+
+export const userLogout = (): IDispatchUserClear => {
+  console.log("Logging user out...");
+  if (!Router.route.includes("login")) {
+    Router.push("/login");
+  }
 
   return {
-    type: UserActionTypes.Logout,
+    type: UserActionTypes.Clear,
   };
 };

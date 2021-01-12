@@ -20,7 +20,7 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
     case UserActionTypes.Login:
       return { ...state, auth: action.payload };
 
-    case UserActionTypes.Logout: {
+    case UserActionTypes.Clear: {
       return initialState;
     }
 

@@ -14,7 +14,7 @@ export class TS {
   ) {
     const envLang = app.general.language!;
 
-    const jsonFile = require(`../../node_modules/@project-boilerplate/shared/src/translations/${context}.lang.json`);
+    const jsonFile = require(`../node_modules/@project-boilerplate/shared/src/translations/${context}.lang.json`);
 
     let translatedString: string;
 

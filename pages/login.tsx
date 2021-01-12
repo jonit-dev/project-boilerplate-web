@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { TextHelper } from "@project-boilerplate/shared/dist";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { CustomAlert } from "../components/theme/CustomAlert";
 import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
+import { TS } from "../libs/TranslationHelper";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
 import { Login__ } from "../styles/pages/login.styles";
@@ -25,7 +27,12 @@ export default function LoginPage() {
     for (const [key, value] of Object.entries(credentials)) {
       if (!credentials[key]) {
         dispatch(
-          showAlert("Oops!", `The field "${key}" cannot be empty!`, "danger")
+          showAlert(
+            "Oops!",
+            TS.translate("validation", "isNotEmpty", {
+              field: TextHelper.capitalizeFirstLetter(key),
+            })
+          )
         );
         return;
       }

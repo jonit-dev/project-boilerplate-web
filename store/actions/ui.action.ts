@@ -3,7 +3,7 @@ import { AlertActionTypes, IDispatchAlertClear, IDispatchAlertShow } from "../..
 export const showAlert = (
   title: string,
   message: string,
-  variant: string
+  variant = "danger"
 ): IDispatchAlertShow => {
   return {
     type: AlertActionTypes.Show,
