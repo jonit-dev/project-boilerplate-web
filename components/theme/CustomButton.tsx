@@ -1,37 +1,30 @@
 import Link from "next/link";
 import React from "react";
+import { Button, ButtonProps } from "react-bootstrap";
 
-interface IProps {
-  children?: string;
+interface IProps extends ButtonProps {
   href?: string;
-  variant?: "primary" | "secondary";
   onClick?: () => void;
 }
 
 export const CustomButton: React.FC<IProps> = ({
   href,
-  variant = "primary",
   onClick,
   children,
+  ...rest
 }) => {
   return (
     <>
       {href ? (
         <Link href={href}>
-          <a
-            onClick={onClick}
-            className={`button button-${variant} button-block`}
-          >
+          <Button onClick={onClick} {...rest}>
             {children}
-          </a>
+          </Button>
         </Link>
       ) : (
-        <a
-          onClick={onClick}
-          className={`button button-${variant} button-block`}
-        >
+        <Button onClick={onClick} {...rest}>
           {children}
-        </a>
+        </Button>
       )}
     </>
   );

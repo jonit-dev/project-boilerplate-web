@@ -1,6 +1,5 @@
+import Link from "next/link";
 import React from "react";
-
-import { CustomButton } from "../../theme/CustomButton";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -14,9 +13,11 @@ export const HeroSection: React.FC = () => {
               to set it up once, and get beautiful results forever.
             </p>
             <div className="hero-form field field-grouped">
-              <div className="control">
-                <CustomButton href="/login">Login</CustomButton>
-              </div>
+              <Link href="/login">
+                <button className="button button-primary button-block">
+                  Login
+                </button>
+              </Link>
             </div>
           </div>
           <div className="hero-illustration">

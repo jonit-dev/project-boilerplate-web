@@ -84,7 +84,7 @@ export default function LoginScreen() {
               </Link>
             </Login__.BottomOptionsContainer>
 
-            <CustomButton variant="primary" onClick={onSubmit}>
+            <CustomButton onClick={onSubmit} variant="primary" block>
               {TS.translate("auth", "login")}
             </CustomButton>
           </Form>
