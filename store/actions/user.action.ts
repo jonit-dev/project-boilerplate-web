@@ -2,6 +2,7 @@ import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
 import { IAPIError } from "../../types/api.types";
+import { IDispatchAlertShow } from "../../types/ui.types";
 import {
   IDispatchUserLogin,
   IDispatchUserLogout,
@@ -9,9 +10,10 @@ import {
   IUserLoginPayload,
   UserActionTypes,
 } from "../../types/user.types";
+import { showAlert } from "./ui.action";
 
 export const userLogin = (credentials: IUserCredentials) => async (
-  dispatch: Dispatch<IDispatchUserLogin>
+  dispatch: Dispatch<IDispatchUserLogin | IDispatchAlertShow>
 ) => {
   try {
     const response = await APIHelper.apiRequest<IUserLoginPayload | IAPIError>(
@@ -37,7 +39,7 @@ export const userLogin = (credentials: IUserCredentials) => async (
 
       const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
 
-      alert(errorMessage);
+      dispatch(showAlert("Oops!", errorMessage, "danger"));
     }
   }
 };

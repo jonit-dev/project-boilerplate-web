@@ -1,7 +1,5 @@
 export interface IAlert {
-  key: string;
   variant: string; //primary, secondary, etc... It should match our bootstrap theme
-  type: UIAlertTypes; // we have the standard 'message' alert and also the modal alert.
   title: string;
   message: string;
 }

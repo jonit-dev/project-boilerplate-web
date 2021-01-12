@@ -1,21 +1,16 @@
 import { useEffect, useState } from "react";
-import { Alert } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
+import { CustomAlert } from "../components/theme/CustomAlert";
 import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
+import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
-import { StoreState } from "../store/reducers/index.reducer";
-import { IUIReducer } from "../store/reducers/ui.reducer";
 import { Login__ } from "../styles/pages/login.styles";
 import { IUserCredentials } from "../types/user.types";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-
-  const { uiAlert } = useSelector<StoreState, IUIReducer>(
-    (state) => state.uiReducer
-  );
 
   const [credentials, setCredentials] = useState<IUserCredentials>({
     email: "",
@@ -29,7 +24,9 @@ export default function LoginPage() {
 
     for (const [key, value] of Object.entries(credentials)) {
       if (!credentials[key]) {
-        alert(`The field ${key} cannot be empty!`);
+        dispatch(
+          showAlert("Oops!", `The field "${key}" cannot be empty!`, "danger")
+        );
         return;
       }
     }
@@ -46,14 +43,7 @@ export default function LoginPage() {
           <h2>Login</h2>
         </div>
 
-        {uiAlert?.key === "login-page" && (
-          <Alert variant={uiAlert.variant}>
-            <p>
-              <strong>{uiAlert.title}</strong>
-            </p>
-            <p>{uiAlert.message}</p>
-          </Alert>
-        )}
+        <CustomAlert />
 
         <div className="login-box-body">
           <form>

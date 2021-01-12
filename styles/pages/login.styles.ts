@@ -19,16 +19,15 @@ const LoginBox = styled(Card__.Base)`
   display: flex;
   flex-wrap: wrap;
 
-  .login-top-container {
+  * {
     flex: 100%;
+  }
+
+  .login-top-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding-bottom: 1rem;
-  }
-
-  .login-box-body {
-    flex: 100%;
   }
 `;
 
