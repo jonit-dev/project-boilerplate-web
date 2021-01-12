@@ -2,17 +2,17 @@ import Link from "next/link";
 import React from "react";
 
 interface IProps {
+  children?: string;
   href?: string;
-  text: string;
   variant?: "primary" | "secondary";
   onClick?: () => void;
 }
 
-export const Button: React.FC<IProps> = ({
+export const CustomButton: React.FC<IProps> = ({
   href,
-  text,
   variant = "primary",
   onClick,
+  children,
 }) => {
   return (
     <>
@@ -22,7 +22,7 @@ export const Button: React.FC<IProps> = ({
             onClick={onClick}
             className={`button button-${variant} button-block`}
           >
-            {text}
+            {children}
           </a>
         </Link>
       ) : (
@@ -30,7 +30,7 @@ export const Button: React.FC<IProps> = ({
           onClick={onClick}
           className={`button button-${variant} button-block`}
         >
-          {text}
+          {children}
         </a>
       )}
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button } from "../theme/Button";
+import { CustomButton } from "../theme/CustomButton";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ export const HeroSection: React.FC = () => {
             </p>
             <div className="hero-form field field-grouped">
               <div className="control">
-                <Button text="Login" href="/login" />
+                <CustomButton href="/login">Login</CustomButton>
               </div>
             </div>
           </div>

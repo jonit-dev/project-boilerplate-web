@@ -1,14 +1,21 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { Alert } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 
-import { Button } from "../components/theme/Button";
+import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
 import { userLogin } from "../store/actions/user.action";
+import { StoreState } from "../store/reducers/index.reducer";
+import { IUIReducer } from "../store/reducers/ui.reducer";
 import { Login__ } from "../styles/pages/login.styles";
 import { IUserCredentials } from "../types/user.types";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
+
+  const { uiAlert } = useSelector<StoreState, IUIReducer>(
+    (state) => state.uiReducer
+  );
 
   const [credentials, setCredentials] = useState<IUserCredentials>({
     email: "",
@@ -38,6 +45,15 @@ export default function LoginPage() {
         <div className="login-top-container">
           <h2>Login</h2>
         </div>
+
+        {uiAlert?.key === "login-page" && (
+          <Alert variant={uiAlert.variant}>
+            <p>
+              <strong>{uiAlert.title}</strong>
+            </p>
+            <p>{uiAlert.message}</p>
+          </Alert>
+        )}
 
         <div className="login-box-body">
           <form>
@@ -70,7 +86,9 @@ export default function LoginPage() {
                 Check me out
               </label>
             </div> */}
-            <Button variant="primary" text="Login" onClick={onSubmit} />
+            <CustomButton variant="primary" onClick={onSubmit}>
+              Login
+            </CustomButton>
           </form>
         </div>
       </Login__.LoginBox>

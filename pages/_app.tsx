@@ -1,18 +1,32 @@
 import "../styles/scss/style.scss";
 
-import { useRouter } from "next/dist/client/router";
+import Router, { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { Provider, useStore } from "react-redux";
+import { Provider, useDispatch, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { clearAlert } from "../store/actions/ui.action";
+import { StoreState } from "../store/reducers/index.reducer";
 import { wrapper } from "../store/store";
 import { Global__ } from "../styles/global.styles";
 
 // pages/_app.tsx
+
 export default wrapper.withRedux(({ Component, pageProps }) => {
+  const store: any = useStore();
+  const dispatch = useDispatch();
   const router = useRouter();
 
-  const store: any = useStore();
+  useEffect(() => {
+    router.events.on("routeChangeStart", (url) => {
+      const state: StoreState = store.getState();
+
+      if (state.uiReducer.uiAlert !== null) {
+        dispatch(clearAlert());
+      }
+    });
+  }, []);
+
   return (
     <Provider store={store}>
       {process.browser ? (

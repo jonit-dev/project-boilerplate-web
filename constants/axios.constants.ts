@@ -16,9 +16,10 @@ apiAxios.interceptors.response.use(
     return response;
   },
   (error) => {
-    // First check should be if the server is actually online
+    // First check should be if the server is actually online. If not, show error and send him to login
 
     if (!error.response) {
+      //!Refactor!
       // store.dispatch(
       //   showAlert(
       //     TS.translate("global", "oops"),
@@ -35,33 +36,40 @@ apiAxios.interceptors.response.use(
       if (!window.location.href.includes("login")) {
         window.location.href = "/login";
       }
+
+      return;
     }
 
     // Then we start checking the message payload...
 
-    const errorResponse: IAPIError = error.response.data;
+    if (error.response.data) {
+      const errorResponse: IAPIError = error.response.data;
 
-    const userReducer: IUserReducer = store.getState().userReducer;
+      const userReducer: IUserReducer = store.getState().userReducer;
 
-    if (userReducer.auth) {
-      switch (errorResponse.statusCode) {
-        case HttpStatus.Unauthorized:
-        case HttpStatus.Forbidden:
-          if (!errorResponse.message.includes("Invalid credentials")) {
-            // store.dispatch(
-            //   showAlert(
-            //     TS.translate("auth", "pleaseLogin"),
-            //     TS.translate("auth", "couldntAuthenticate")
-            //   )
-            // );
-            alert("Invalid credentials! Please login again.");
-            store.dispatch(userLogout());
-            if (!window.location.href.includes("login")) {
-              window.location.href = "/login";
+      if (userReducer.auth) {
+        switch (errorResponse.statusCode) {
+          case HttpStatus.Unauthorized:
+          case HttpStatus.Forbidden:
+            if (!errorResponse.message.includes("Invalid credentials")) {
+              // store.dispatch(
+              //   showAlert(
+              //     TS.translate("auth", "pleaseLogin"),
+              //     TS.translate("auth", "couldntAuthenticate")
+              //   )
+              // );
+              alert("Invalid credentials! Please login again.");
+              store.dispatch(userLogout());
+              if (!window.location.href.includes("login")) {
+                window.location.href = "/login";
+              }
             }
-          }
 
-          break;
+            break;
+          default:
+            console.log(error);
+            break;
+        }
       }
     }
 
