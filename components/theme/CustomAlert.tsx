@@ -21,7 +21,7 @@ export const CustomAlert: React.FC = (props) => {
         dismissible
       >
         <Alert.Heading>{uiAlert.title}</Alert.Heading>
-        <p>{uiAlert.message}</p>
+        {uiAlert.message}
       </Alert>
     )
   );

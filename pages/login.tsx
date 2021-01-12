@@ -1,5 +1,7 @@
 import { TextHelper } from "@project-boilerplate/shared/dist";
+import Link from "next/link";
 import { useState } from "react";
+import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 import { CustomAlert } from "../components/theme/CustomAlert";
@@ -46,18 +48,18 @@ export default function LoginPage() {
   return (
     <Login__.Container>
       <Login__.LoginBox>
-        <div className="login-top-container">
-          <h2>Login</h2>
-        </div>
+        <Login__.LoginTopContainer>
+          <h2>{TS.translate("auth", "login")}</h2>
+        </Login__.LoginTopContainer>
 
         <CustomAlert />
 
-        <div className="login-box-body">
-          <form>
+        <div>
+          <Form>
             <Input
               id="login-email"
               type="email"
-              label="Email"
+              label={TS.translate("form", "email")}
               onChange={(e) =>
                 setCredentials({ ...credentials, email: e.target.value })
               }
@@ -67,26 +69,25 @@ export default function LoginPage() {
             <Input
               id="loginpassword"
               type="password"
-              label="Password"
+              label={TS.translate("form", "password")}
               onChange={(e) =>
                 setCredentials({ ...credentials, password: e.target.value })
               }
             />
 
-            {/* <div className="mb-3 form-check">
-              <input
-                type="checkbox"
-                className="form-check-input"
-                id="exampleCheck1"
-              />
-              <label className="form-check-label" htmlFor="exampleCheck1">
-                Check me out
-              </label>
-            </div> */}
+            <Login__.BottomOptionsContainer>
+              <Link href="/register">
+                <small>{TS.translate("auth", "createYourAccount")}</small>
+              </Link>
+              <Link href="/forgot-password">
+                <small>{TS.translate("auth", "forgotPassword")}</small>
+              </Link>
+            </Login__.BottomOptionsContainer>
+
             <CustomButton variant="primary" onClick={onSubmit}>
-              Login
+              {TS.translate("auth", "login")}
             </CustomButton>
-          </form>
+          </Form>
         </div>
       </Login__.LoginBox>
     </Login__.Container>
