@@ -18,8 +18,9 @@ export enum UserActionTypes {
   registerUser,
 }
 
-export interface IUserAccessToken {
+export interface IUserLoginPayload {
   accessToken: string;
+  refreshToken: string;
 }
 
 export enum UserActionTypes {
@@ -38,7 +39,7 @@ export interface IDispatchUserInfo {
 
 export interface IDispatchUserLogin {
   type: UserActionTypes.Login;
-  payload: IUserAccessToken;
+  payload: IUserLoginPayload;
 }
 
 export interface IDispatchUserLogout {

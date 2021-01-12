@@ -1,63 +1,72 @@
+import { HttpStatus } from "@project-boilerplate/shared/dist";
 import axios from "axios";
 
+import { userLogout } from "../store/actions/user.action";
+import { IUserReducer } from "../store/reducers/user.reducer";
+import { store } from "../store/store";
+import { IAPIError } from "../types/api.types";
 import { app } from "./env";
 
 const apiAxios = axios.create({
   baseURL: app.general.apiUrl,
 });
 
-// apiAxios.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   (error) => {
-//     // First check should be if the server is actually online
+apiAxios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    // First check should be if the server is actually online
 
-//     if (!error.response) {
-//       store.dispatch(
-//         showAlert(
-//           TS.translate("global", "oops"),
-//           "Couldn't connect to the server. Please, check your internet connection!"
-//         )
-//       );
+    if (!error.response) {
+      // store.dispatch(
+      //   showAlert(
+      //     TS.translate("global", "oops"),
+      //     "Couldn't connect to the server. Please, check your internet connection!"
+      //   )
+      // );
+      alert(
+        "Couldn't connect to the server. Please, check your internet connection!"
+      );
 
-//       //Clear user info and force a logout by redirecting him to auth
-//       store.dispatch(userClear());
+      //Clear user info and force a logout by redirecting him to auth
+      store.dispatch(userLogout());
 
-//       if (!window.location.href.includes("auth")) {
-//         RoutingHelper.redirect("/auth");
-//       }
-//     }
+      if (!window.location.href.includes("login")) {
+        window.location.href = "/login";
+      }
+    }
 
-//     // Then we start checking the message payload...
+    // Then we start checking the message payload...
 
-//     const errorResponse: IAPIError = error.response.data;
+    const errorResponse: IAPIError = error.response.data;
 
-//     const user: IUser = store.getState().userReducer.user;
+    const userReducer: IUserReducer = store.getState().userReducer;
 
-//     if (user.token) {
-//       switch (errorResponse.statusCode) {
-//         case HttpStatus.Unauthorized:
-//         case HttpStatus.Forbidden:
-//           if (!errorResponse.message.includes("Invalid credentials")) {
-//             store.dispatch(
-//               showAlert(
-//                 TS.translate("auth", "pleaseLogin"),
-//                 TS.translate("auth", "couldntAuthenticate")
-//               )
-//             );
-//             store.dispatch(userClear());
-//             if (!window.location.href.includes("auth")) {
-//               RoutingHelper.redirect("/auth");
-//             }
-//           }
+    if (userReducer.auth) {
+      switch (errorResponse.statusCode) {
+        case HttpStatus.Unauthorized:
+        case HttpStatus.Forbidden:
+          if (!errorResponse.message.includes("Invalid credentials")) {
+            // store.dispatch(
+            //   showAlert(
+            //     TS.translate("auth", "pleaseLogin"),
+            //     TS.translate("auth", "couldntAuthenticate")
+            //   )
+            // );
+            alert("Invalid credentials! Please login again.");
+            store.dispatch(userLogout());
+            if (!window.location.href.includes("login")) {
+              window.location.href = "/login";
+            }
+          }
 
-//           break;
-//       }
-//     }
+          break;
+      }
+    }
 
-//     return Promise.reject(error);
-//   }
-// );
+    return Promise.reject(error);
+  }
+);
 
 export { apiAxios };

@@ -19,7 +19,7 @@ const LoginBox = styled(Card__.Base)`
   display: flex;
   flex-wrap: wrap;
 
-  .logo-container {
+  .login-top-container {
     flex: 100%;
     display: flex;
     justify-content: center;

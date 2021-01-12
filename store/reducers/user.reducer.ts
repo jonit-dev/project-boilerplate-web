@@ -1,10 +1,10 @@
 import { Reducer } from "redux";
 
-import { IUser, IUserAccessToken, UserAction, UserActionTypes } from "../../types/user.types";
+import { IUser, IUserLoginPayload, UserAction, UserActionTypes } from "../../types/user.types";
 
 export interface IUserReducer {
   user: IUser | null;
-  auth: IUserAccessToken | null;
+  auth: IUserLoginPayload | null;
 }
 
 const initialState: IUserReducer = {
@@ -19,6 +19,10 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
   switch (action.type) {
     case UserActionTypes.Login:
       return { ...state, auth: action.payload };
+
+    case UserActionTypes.Logout: {
+      return initialState;
+    }
 
     default:
       return state;

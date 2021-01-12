@@ -1,26 +1,42 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { Button } from "../components/theme/Button";
 import { Input } from "../components/theme/form/Input";
-import { Logo } from "../components/theme/Logo";
+import { userLogin } from "../store/actions/user.action";
 import { Login__ } from "../styles/pages/login.styles";
 import { IUserCredentials } from "../types/user.types";
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+
   const [credentials, setCredentials] = useState<IUserCredentials>({
     email: "",
     password: "",
   });
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     console.log(credentials);
+
+    // check if all fields are not empty (front-end validation)
+
+    for (const [key, value] of Object.entries(credentials)) {
+      if (!credentials[key]) {
+        alert(`The field ${key} cannot be empty!`);
+        return;
+      }
+    }
+
+    // if everything is ok, dispatch login action
+
+    await dispatch(userLogin(credentials));
   };
 
   return (
     <Login__.Container>
       <Login__.LoginBox>
-        <div className="logo-container">
-          <Logo />
+        <div className="login-top-container">
+          <h2>Login</h2>
         </div>
 
         <div className="login-box-body">

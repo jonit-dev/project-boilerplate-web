@@ -1,18 +1,33 @@
 import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
-import { IDispatchUserLogin, IUserAccessToken, IUserCredentials, UserActionTypes } from "../../types/user.types";
+import {
+  IDispatchUserLogin,
+  IDispatchUserLogout,
+  IUserCredentials,
+  IUserLoginPayload,
+  UserActionTypes,
+} from "../../types/user.types";
 
 export const userLogin = (credentials: IUserCredentials) => async (
   dispatch: Dispatch<IDispatchUserLogin>
 ) => {
-  const response = await APIHelper.apiRequest<IUserAccessToken>(
-    "GET",
-    "/auth/signin",
+  const response = await APIHelper.apiRequest<IUserLoginPayload>(
+    "POST",
+    "/auth/login",
     credentials
   );
+
+  const loginPayload = response.data as IUserLoginPayload;
+
   dispatch({
     type: UserActionTypes.Login,
-    payload: response.data,
+    payload: loginPayload,
   });
+};
+
+export const userLogout = (): IDispatchUserLogout => {
+  return {
+    type: UserActionTypes.Logout,
+  };
 };

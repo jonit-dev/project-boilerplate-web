@@ -15,4 +15,7 @@ export const theme = {
     primary: "Fira Sans, serif",
     secondary: "Heebo, sans-serif",
   },
+  breakpoints: {
+    small: "700px",
+  },
 };

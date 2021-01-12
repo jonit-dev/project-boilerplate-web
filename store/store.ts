@@ -1,15 +1,27 @@
 import { createWrapper } from "next-redux-wrapper";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.reducer";
 
+declare global {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const isServer = typeof window === "undefined";
+
+//Redux specific
+const composeEnhancers = isServer
+  ? compose
+  : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const makeConfiguredStore = (reducer) =>
-  createStore(reducer, undefined, applyMiddleware(thunk));
+  createStore(reducer, undefined, composeEnhancers(applyMiddleware(thunk)));
 
 const makeStore = () => {
-  const isServer = typeof window === "undefined";
-
   if (isServer) {
     return makeConfiguredStore(rootReducer);
   } else {
@@ -31,5 +43,7 @@ const makeStore = () => {
     return store;
   }
 };
+
+export const store = makeStore();
 
 export const wrapper = createWrapper(makeStore);
