@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Header__ } from "../../styles/components/header.styles";
-import { Logo } from "../theme/Logo";
+import { Header__ } from "../../../styles/components/header.styles";
+import { Logo } from "../../theme/Logo";
 
 interface IProps {
   variant: "relative" | "static";

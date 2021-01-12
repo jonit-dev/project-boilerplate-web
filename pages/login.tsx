@@ -13,7 +13,7 @@ import { userLogin } from "../store/actions/user.action";
 import { Login__ } from "../styles/pages/login.styles";
 import { IUserCredentials } from "../types/user.types";
 
-export default function LoginPage() {
+export default function LoginScreen() {
   const dispatch = useDispatch();
 
   const [credentials, setCredentials] = useState<IUserCredentials>({

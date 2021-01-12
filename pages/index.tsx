@@ -1,15 +1,15 @@
 import Head from "next/head";
 import React from "react";
 
-import { FeaturesSection } from "../components/landing/FeaturesSection";
-import { Footer } from "../components/landing/Footer";
-import { Header } from "../components/landing/Header";
-import { HeroSection } from "../components/landing/HeroSection";
-import { NewsletterSection } from "../components/landing/NewsletterSection";
-import { TestimonialsSection } from "../components/landing/TestimonialsSection";
+import { FeaturesSection } from "../components/pages/landing/FeaturesSection";
+import { Footer } from "../components/pages/landing/Footer";
+import { Header } from "../components/pages/landing/Header";
+import { HeroSection } from "../components/pages/landing/HeroSection";
+import { NewsletterSection } from "../components/pages/landing/NewsletterSection";
+import { TestimonialsSection } from "../components/pages/landing/TestimonialsSection";
 import { app } from "../constants/env";
 
-export default function Home() {
+export default function IndexScreen() {
   return (
     <React.Fragment>
       <Head>

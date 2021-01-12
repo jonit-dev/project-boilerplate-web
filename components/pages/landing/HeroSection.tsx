@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CustomButton } from "../theme/CustomButton";
+import { CustomButton } from "../../theme/CustomButton";
 
 export const HeroSection: React.FC = () => {
   return (

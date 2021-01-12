@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Logo } from "../theme/Logo";
+import { Logo } from "../../theme/Logo";
 
 export const Footer: React.FC = (props) => {
   return (

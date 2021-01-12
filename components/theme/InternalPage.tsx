@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Pages__ } from "../../styles/components/page.styles";
-import { Footer } from "../landing/Footer";
-import { Header } from "../landing/Header";
+import { Footer } from "../pages/landing/Footer";
+import { Header } from "../pages/landing/Header";
 
 interface IProps {
   children?: React.ReactElement;
