@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,6 +12,12 @@ export const CustomAlert: React.FC = (props) => {
   );
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(clearAlert());
+    }, 10000);
+  }, [uiAlert]);
 
   return (
     uiAlert && (
