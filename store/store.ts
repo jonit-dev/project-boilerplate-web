@@ -34,19 +34,15 @@ const makeConfiguredStore = (reducer) =>
   createStore(reducer, undefined, composeEnhancers(applyMiddleware(thunk)));
 
 export const store: any = makeConfiguredStore(persistedReducer);
+store.__persistor = persistStore(store); // Nasty hack
 
 const makeServerStore = () => makeConfiguredStore(rootReducer);
-
-const makeClientStore = () => {
-  store.__persistor = persistStore(store); // Nasty hack
-  return store;
-};
 
 const makeStore = () => {
   if (isServer) {
     return makeServerStore();
   } else {
-    return makeClientStore();
+    return store;
   }
 };
 

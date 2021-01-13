@@ -58,7 +58,7 @@ const LoginBox = styled(Card__.Base)`
   }
 `;
 
-export const Login__ = {
+export const Auth__ = {
   Container,
   LoginTopContainer,
   LoginBox,

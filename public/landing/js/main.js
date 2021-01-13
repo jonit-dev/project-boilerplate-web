@@ -24,7 +24,8 @@
     const heroAnimation = anime.timeline({ autoplay: false })
     const strokedElement = document.querySelector('.stroke-animation')
 
-    strokedElement.setAttribute('stroke-dashoffset', anime.setDashoffset(strokedElement))
+    if(strokedElement) {
+      strokedElement.setAttribute('stroke-dashoffset', anime.setDashoffset(strokedElement))
 
     heroAnimation.add({
       targets: '.stroke-animation',
@@ -92,6 +93,7 @@
 
     doc.classList.add('anime-ready')
     heroAnimation.play()
+    }
   }
   },500)
          

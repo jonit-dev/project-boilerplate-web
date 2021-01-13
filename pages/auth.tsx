@@ -15,7 +15,7 @@ import { TS } from "../libs/TranslationHelper";
 import { getGoogleOAuthUrl, userGoogleOAuthStoreToken } from "../store/actions/oauth.actions";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
-import { Login__ } from "../styles/pages/login.styles";
+import { Auth__ } from "../styles/pages/auth.styles";
 import { IUserCredentials } from "../types/user.types";
 
 export default function LoginScreen() {
@@ -27,16 +27,21 @@ export default function LoginScreen() {
     password: "",
   });
 
-  useEffect(() => {
-    // check if an accessToken parameter was passed to our url
+  const handleOAuthAccessToken = () => {
+    // check if an accessToken parameter was passed to our url as query param
     const accessToken = router.query.accessToken as string;
 
-    console.log("found access token on route");
+    console.log(router.query);
 
     if (accessToken) {
+      console.log("found access token on route");
       dispatch(userGoogleOAuthStoreToken(accessToken));
       router.push("/main");
     }
+  };
+
+  useEffect(() => {
+    handleOAuthAccessToken();
   }, []);
 
   const onSubmit = async () => {
@@ -68,15 +73,17 @@ export default function LoginScreen() {
     if (googleUrl) {
       console.log(googleUrl);
       window.location.href = String(googleUrl);
+
+      handleOAuthAccessToken();
     }
   };
 
   return (
-    <Login__.Container>
-      <Login__.LoginBox>
-        <Login__.LoginTopContainer>
+    <Auth__.Container>
+      <Auth__.LoginBox>
+        <Auth__.LoginTopContainer>
           <h2>{TS.translate("auth", "login")}</h2>
-        </Login__.LoginTopContainer>
+        </Auth__.LoginTopContainer>
 
         <CustomAlert />
 
@@ -101,14 +108,14 @@ export default function LoginScreen() {
               }
             />
 
-            <Login__.BottomOptionsContainer>
+            <Auth__.BottomOptionsContainer>
               <Link href="/register">
                 <small>{TS.translate("auth", "createYourAccount")}</small>
               </Link>
               <Link href="/forgot-password">
                 <small>{TS.translate("auth", "forgotPassword")}</small>
               </Link>
-            </Login__.BottomOptionsContainer>
+            </Auth__.BottomOptionsContainer>
 
             <CustomButton onClick={onSubmit} variant="primary" block>
               {TS.translate("auth", "login")}
@@ -129,7 +136,7 @@ export default function LoginScreen() {
             </CustomButton>
           </Form>
         </div>
-      </Login__.LoginBox>
-    </Login__.Container>
+      </Auth__.LoginBox>
+    </Auth__.Container>
   );
 }

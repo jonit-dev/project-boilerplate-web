@@ -2,11 +2,12 @@ import "../styles/scss/style.scss";
 
 import Router, { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { Provider, useDispatch, useStore } from "react-redux";
+import { Provider, useDispatch, useSelector, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
 import { clearAlert } from "../store/actions/ui.action";
 import { StoreState } from "../store/reducers/index.reducer";
+import { IUserReducer } from "../store/reducers/user.reducer";
 import { wrapper } from "../store/store";
 import { Global__ } from "../styles/global.styles";
 
@@ -16,9 +17,15 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
   const dispatch = useDispatch();
   const router = useRouter();
+  const { auth } = useSelector<StoreState, IUserReducer>(
+    (state) => state.userReducer
+  );
 
   useEffect(() => {
     // check if user has auth
+    if (auth?.accessToken) {
+      router.push("/main");
+    }
 
     router.events.on("routeChangeStart", (url) => {
       const state: StoreState = store.getState();
