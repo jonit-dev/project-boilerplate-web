@@ -17,6 +17,7 @@ export const showAlert = (
 };
 
 export const clearAlert = (): IDispatchAlertClear => {
+  console.log("Clearing alert data");
   return {
     type: AlertActionTypes.Clear,
   };

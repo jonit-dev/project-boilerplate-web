@@ -5,11 +5,13 @@ import { IUser, IUserLoginPayload, UserAction, UserActionTypes } from "../../typ
 export interface IUserReducer {
   user: IUser | null;
   auth: IUserLoginPayload | null;
+  isLoggedIn: boolean;
 }
 
 const initialState: IUserReducer = {
   user: null,
   auth: null,
+  isLoggedIn: false,
 };
 
 export const userReducer: Reducer<IUserReducer, UserAction> = (
@@ -18,13 +20,10 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
 ) => {
   switch (action.type) {
     case UserActionTypes.Login:
-      return { ...state, auth: action.payload };
+      return { ...state, auth: action.payload, isLoggedIn: true };
 
     case UserActionTypes.Clear:
-      return {
-        user: initialState.user,
-        auth: initialState.auth,
-      };
+      return initialState;
 
     case UserActionTypes.GoogleOAuthStoreToken:
       const { accessToken, refreshToken } = action.payload;
@@ -35,6 +34,7 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
           accessToken,
           refreshToken,
         },
+        isLoggedIn: true,
       };
 
     default:

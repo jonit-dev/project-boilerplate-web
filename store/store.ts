@@ -13,6 +13,8 @@ declare global {
 }
 const isServer = typeof window === "undefined";
 
+const middlewares = [thunk];
+
 // Redux devtools
 const composeEnhancers = isServer
   ? compose
@@ -23,27 +25,28 @@ const composeEnhancers = isServer
 const storage = require("redux-persist/lib/storage").default;
 
 const persistConfig = {
-  key: "nextjs",
-  whitelist: ["userReducer"], // make sure it does not clash with server keys
-  storage,
+  key: "root",
+  whitelist: ["userReducer"], // only counter will be persisted, add other reducers if needed
+  storage, // if needed, use a safer storage
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
 
-const makeConfiguredStore = (reducer) =>
-  createStore(reducer, undefined, composeEnhancers(applyMiddleware(thunk)));
+export const store: any = createStore(
+  persistedReducer,
+  composeEnhancers(applyMiddleware(...middlewares))
+); // Creating the store again
 
-export const store: any = makeConfiguredStore(persistedReducer);
-store.__persistor = persistStore(store); // Nasty hack
+store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
 
-const makeServerStore = () => makeConfiguredStore(rootReducer);
-
-const makeStore = () => {
+const makeStore = ({ isServer }) => {
   if (isServer) {
-    return makeServerStore();
+    //If it's on server side, create a store
+    return createStore(rootReducer, applyMiddleware(...middlewares));
   } else {
     return store;
   }
 };
 
+//@ts-expect-error error
 export const wrapper = createWrapper(makeStore);

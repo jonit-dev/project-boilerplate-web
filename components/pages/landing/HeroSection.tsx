@@ -1,7 +1,15 @@
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
+
+import { StoreState } from "../../../store/reducers/index.reducer";
+import { IUserReducer } from "../../../store/reducers/user.reducer";
 
 export const HeroSection: React.FC = () => {
+  const { isLoggedIn } = useSelector<StoreState, IUserReducer>(
+    (state) => state.userReducer
+  );
+
   return (
     <section className="hero">
       <div className="container">
@@ -13,7 +21,7 @@ export const HeroSection: React.FC = () => {
               to set it up once, and get beautiful results forever.
             </p>
             <div className="hero-form field field-grouped">
-              <Link href="/auth">
+              <Link href={isLoggedIn ? "/main" : "/auth"}>
                 <button className="button button-primary button-block">
                   Login
                 </button>

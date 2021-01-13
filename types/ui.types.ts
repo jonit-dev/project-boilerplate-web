@@ -10,8 +10,8 @@ export enum UIAlertTypes {
 }
 
 export enum AlertActionTypes {
-  Show = "Show",
-  Clear = "Clear",
+  Show = "AlertShow",
+  Clear = "AlertClear",
 }
 
 export interface IDispatchAlertShow {

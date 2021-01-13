@@ -24,11 +24,11 @@ export interface IUserLoginPayload {
 }
 
 export enum UserActionTypes {
-  Register = "Register",
-  Login = "Login",
-  RefreshInfo = "RefreshInfo",
-  Clear = "Clear",
-  GoogleOAuthStoreToken = "GoogleOAuthStoreToken",
+  Register = "UserRegister",
+  Login = "UserLogin",
+  RefreshInfo = "UserRefreshInfo",
+  Clear = "UserClear",
+  GoogleOAuthStoreToken = "UserGoogleOAuthStoreToken",
 }
 
 // Dispatch actions

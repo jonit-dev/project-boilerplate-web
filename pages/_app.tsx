@@ -17,16 +17,16 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { auth } = useSelector<StoreState, IUserReducer>(
+  const { isLoggedIn } = useSelector<StoreState, IUserReducer>(
     (state) => state.userReducer
   );
 
-  useEffect(() => {
-    // check if user has auth
-    if (auth?.accessToken) {
-      router.push("/main");
-    }
+  if (isLoggedIn && router.route === "/auth") {
+    // if we're logged in and hit auth, lets just automatically redirect the user to /main
+    router.push("/main");
+  }
 
+  useEffect(() => {
     router.events.on("routeChangeStart", (url) => {
       const state: StoreState = store.getState();
 

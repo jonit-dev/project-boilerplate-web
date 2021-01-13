@@ -27,22 +27,13 @@ export default function LoginScreen() {
     password: "",
   });
 
-  const handleOAuthAccessToken = () => {
-    // check if an accessToken parameter was passed to our url as query param
+  useEffect(() => {
     const accessToken = router.query.accessToken as string;
 
-    console.log(router.query);
-
     if (accessToken) {
-      console.log("found access token on route");
       dispatch(userGoogleOAuthStoreToken(accessToken));
-      router.push("/main");
     }
-  };
-
-  useEffect(() => {
-    handleOAuthAccessToken();
-  }, []);
+  }, [router]);
 
   const onSubmit = async () => {
     console.log(credentials);
@@ -71,10 +62,7 @@ export default function LoginScreen() {
   const onSignInWithGoogle = async () => {
     const googleUrl = await dispatch(getGoogleOAuthUrl());
     if (googleUrl) {
-      console.log(googleUrl);
       window.location.href = String(googleUrl);
-
-      handleOAuthAccessToken();
     }
   };
 
