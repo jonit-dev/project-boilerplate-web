@@ -20,6 +20,7 @@ apiAxios.interceptors.response.use(
   (error) => {
     // First check should be if the server is actually online. If not, show error and send him to login
     if (!error.response) {
+      console.log("Connection error!");
       store.dispatch(
         showAlert(
           TS.translate("global", "oops"),
@@ -28,7 +29,7 @@ apiAxios.interceptors.response.use(
       );
 
       //Clear user info and force a logout by redirecting him to auth
-      store.dispatch(userLogout());
+      // store.dispatch(userLogout());
 
       return;
     }

@@ -5,17 +5,19 @@ import { APIHelper } from "./APIHelper";
 export class OAuthHelper {
   public static async getGoogleOAuthUrl(): Promise<string | false> {
     try {
-      const response = await APIHelper.apiRequest(
+      const response = await APIHelper.apiRequest<IGoogleOAuthUrlResponse>(
         "GET",
         "/auth/google/url",
         null,
         false
       );
 
-      if (response.status === HttpStatus.OK) {
-        const { googleOAuthUrl } = response.data as IGoogleOAuthUrlResponse;
+      if (response.status) {
+        if (response.status === HttpStatus.OK) {
+          const { googleOAuthUrl } = response.data as IGoogleOAuthUrlResponse;
 
-        return googleOAuthUrl;
+          return googleOAuthUrl;
+        }
       }
     } catch (error) {
       console.error(error);

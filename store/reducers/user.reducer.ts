@@ -21,7 +21,10 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
       return { ...state, auth: action.payload };
 
     case UserActionTypes.Clear: {
-      return initialState;
+      return {
+        user: initialState.user,
+        auth: initialState.auth,
+      };
     }
 
     default:

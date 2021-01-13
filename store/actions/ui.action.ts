@@ -5,6 +5,7 @@ export const showAlert = (
   message: string,
   variant = "danger"
 ): IDispatchAlertShow => {
+  console.log("Showing alert...");
   return {
     type: AlertActionTypes.Show,
     payload: {

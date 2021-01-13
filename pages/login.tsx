@@ -10,6 +10,7 @@ import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
 import { SectionDivider } from "../components/theme/SectionDivider";
 import { theme } from "../constants/theme";
+import { OAuthHelper } from "../libs/OAuthHelper";
 import { TS } from "../libs/TranslationHelper";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
@@ -46,6 +47,14 @@ export default function LoginScreen() {
     // if everything is ok, dispatch login action
 
     await dispatch(userLogin(credentials));
+  };
+
+  const onSignInWithGoogle = async () => {
+    const googleUrl = await OAuthHelper.getGoogleOAuthUrl();
+    if (googleUrl) {
+      console.log(googleUrl);
+      window.location.href = googleUrl;
+    }
   };
 
   return (
@@ -94,7 +103,7 @@ export default function LoginScreen() {
             <SectionDivider>OR</SectionDivider>
 
             <CustomButton
-              onClick={() => console.log("google signin")}
+              onClick={onSignInWithGoogle}
               variant="primary"
               backgroundColor={theme.colors.google}
               textColor="white"

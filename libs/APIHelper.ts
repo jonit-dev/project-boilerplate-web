@@ -2,6 +2,7 @@ import { TextHelper } from "@project-boilerplate/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { apiAxios } from "../constants/axios.constants";
+import { IAPIError } from "../types/api.types";
 
 export class APIHelper {
   public static async request<T>(
@@ -18,7 +19,7 @@ export class APIHelper {
     url: string,
     data?: object | null,
     authenticated = true
-  ): Promise<AxiosResponse<T>> {
+  ): Promise<AxiosResponse<T | IAPIError>> {
     // if (authenticated) {
     //   const userReducer = store.getState().userReducer;
 
