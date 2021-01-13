@@ -1,3 +1,4 @@
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { TextHelper } from "@project-boilerplate/shared/dist";
 import Link from "next/link";
 import { useState } from "react";
@@ -8,6 +9,7 @@ import { CustomAlert } from "../components/theme/CustomAlert";
 import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
 import { SectionDivider } from "../components/theme/SectionDivider";
+import { theme } from "../constants/theme";
 import { TS } from "../libs/TranslationHelper";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
@@ -90,6 +92,17 @@ export default function LoginScreen() {
             </CustomButton>
 
             <SectionDivider>OR</SectionDivider>
+
+            <CustomButton
+              onClick={() => console.log("google signin")}
+              variant="primary"
+              backgroundColor={theme.colors.google}
+              textColor="white"
+              block
+              icon={faGoogle}
+            >
+              Sign in with Google
+            </CustomButton>
           </Form>
         </div>
       </Login__.LoginBox>

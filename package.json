@@ -34,6 +34,11 @@
     "typescript": "^4.1.3"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.14",
     "@project-boilerplate/shared": "^1.0.2",
     "@types/axios": "^0.14.0",
     "@types/next-redux-wrapper": "^3.0.0",

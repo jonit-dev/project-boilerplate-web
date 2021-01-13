@@ -10,6 +10,7 @@ export const theme = {
     success: "#1ADAB7",
     warning: "#DB5D45",
     info: "#2F2BC6",
+    google: "#DD4C39",
   },
   typography: {
     primary: "Fira Sans, serif",
