@@ -9,7 +9,16 @@ interface IContainerProps {
 
 const Container = styled.div<IContainerProps>`
   .button-icon {
-    max-width: 50px;
+    max-width: 30px;
+    position: relative;
+    top: -1px;
+
+    &.button-icon-start {
+      margin-right: 0.25rem;
+    }
+    &.button-icon-end {
+      margin-left: 0.25rem;
+    }
   }
 
   .btn {

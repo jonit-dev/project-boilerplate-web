@@ -12,6 +12,7 @@ interface IProps extends ButtonProps {
   backgroundColor?: string;
   textColor?: string;
   icon?: IconProp;
+  iconSlot?: "start" | "end";
 }
 
 export const CustomButton: React.FC<IProps> = ({
@@ -21,12 +22,21 @@ export const CustomButton: React.FC<IProps> = ({
   backgroundColor,
   textColor,
   icon,
+  iconSlot,
   ...rest
 }) => {
   const ButtonWithIcons = () => (
     <Button onClick={onClick} {...rest}>
-      {icon && <FontAwesomeIcon icon={icon} className="button-icon" />}
+      {icon && iconSlot === "start" && (
+        <FontAwesomeIcon
+          icon={icon}
+          className="button-icon button-icon-start"
+        />
+      )}
       {children}
+      {icon && iconSlot === "end" && (
+        <FontAwesomeIcon icon={icon} className="button-icon button-icon-end" />
+      )}
     </Button>
   );
 

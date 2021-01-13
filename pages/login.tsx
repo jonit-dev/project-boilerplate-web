@@ -98,8 +98,9 @@ export default function LoginScreen() {
               variant="primary"
               backgroundColor={theme.colors.google}
               textColor="white"
-              block
               icon={faGoogle}
+              iconSlot="start"
+              block
             >
               Sign in with Google
             </CustomButton>
