@@ -13,7 +13,7 @@ export const HeroSection: React.FC = () => {
               to set it up once, and get beautiful results forever.
             </p>
             <div className="hero-form field field-grouped">
-              <Link href="/login">
+              <Link href="/auth">
                 <button className="button button-primary button-block">
                   Login
                 </button>

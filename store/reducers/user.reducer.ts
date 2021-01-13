@@ -20,12 +20,22 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
     case UserActionTypes.Login:
       return { ...state, auth: action.payload };
 
-    case UserActionTypes.Clear: {
+    case UserActionTypes.Clear:
       return {
         user: initialState.user,
         auth: initialState.auth,
       };
-    }
+
+    case UserActionTypes.GoogleOAuthStoreToken:
+      const { accessToken, refreshToken } = action.payload;
+
+      return {
+        ...state,
+        auth: {
+          accessToken,
+          refreshToken,
+        },
+      };
 
     default:
       return state;

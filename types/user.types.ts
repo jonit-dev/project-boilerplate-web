@@ -28,10 +28,15 @@ export enum UserActionTypes {
   Login = "Login",
   RefreshInfo = "RefreshInfo",
   Clear = "Clear",
+  GoogleOAuthStoreToken = "GoogleOAuthStoreToken",
 }
 
 // Dispatch actions
 
+export interface IDispatchUserGoogleOAuthStoreToken {
+  type: UserActionTypes.GoogleOAuthStoreToken;
+  payload: IUserLoginPayload;
+}
 export interface IDispatchUserInfo {
   type: UserActionTypes.RefreshInfo;
   payload: IUser;
@@ -54,5 +59,6 @@ export interface IDispatchUserRegister {
 export type UserAction =
   | IDispatchUserRegister
   | IDispatchUserLogin
+  | IDispatchUserGoogleOAuthStoreToken
   | IDispatchUserInfo
   | IDispatchUserClear;

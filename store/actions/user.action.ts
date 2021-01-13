@@ -19,7 +19,7 @@ export const userLogin = (credentials: IUserCredentials) => async (
   try {
     const response = await APIHelper.apiRequest<IUserLoginPayload | IAPIError>(
       "POST",
-      "/auth/login",
+      "/auth/auth",
       credentials,
       false
     );
@@ -54,7 +54,7 @@ export const userClearInfo = (): IDispatchUserClear => {
 export const userLogout = (): IDispatchUserClear => {
   console.log("Logging user out...");
   if (!Router.route.includes("login")) {
-    Router.push("/login");
+    Router.push("/auth");
   }
 
   return {

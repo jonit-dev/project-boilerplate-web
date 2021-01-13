@@ -19,6 +19,7 @@ apiAxios.interceptors.response.use(
   },
   (error) => {
     // First check should be if the server is actually online. If not, show error and send him to login
+
     if (!error.response) {
       console.log("Connection error!");
       store.dispatch(
@@ -62,7 +63,6 @@ apiAxios.interceptors.response.use(
         }
       }
     }
-
     return Promise.reject(error);
   }
 );

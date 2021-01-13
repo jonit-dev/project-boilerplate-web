@@ -1,7 +1,8 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { TextHelper } from "@project-boilerplate/shared/dist";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
@@ -10,8 +11,8 @@ import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
 import { SectionDivider } from "../components/theme/SectionDivider";
 import { theme } from "../constants/theme";
-import { OAuthHelper } from "../libs/OAuthHelper";
 import { TS } from "../libs/TranslationHelper";
+import { getGoogleOAuthUrl, userGoogleOAuthStoreToken } from "../store/actions/oauth.actions";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
 import { Login__ } from "../styles/pages/login.styles";
@@ -19,11 +20,24 @@ import { IUserCredentials } from "../types/user.types";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [credentials, setCredentials] = useState<IUserCredentials>({
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    // check if an accessToken parameter was passed to our url
+    const accessToken = router.query.accessToken as string;
+
+    console.log("found access token on route");
+
+    if (accessToken) {
+      dispatch(userGoogleOAuthStoreToken(accessToken));
+      router.push("/main");
+    }
+  }, []);
 
   const onSubmit = async () => {
     console.log(credentials);
@@ -50,10 +64,10 @@ export default function LoginScreen() {
   };
 
   const onSignInWithGoogle = async () => {
-    const googleUrl = await OAuthHelper.getGoogleOAuthUrl();
+    const googleUrl = await dispatch(getGoogleOAuthUrl());
     if (googleUrl) {
       console.log(googleUrl);
-      window.location.href = googleUrl;
+      window.location.href = String(googleUrl);
     }
   };
 

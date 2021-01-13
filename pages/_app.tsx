@@ -18,6 +18,8 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   const router = useRouter();
 
   useEffect(() => {
+    // check if user has auth
+
     router.events.on("routeChangeStart", (url) => {
       const state: StoreState = store.getState();
 
