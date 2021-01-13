@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { CustomAlert } from "../components/theme/CustomAlert";
 import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
+import { SectionDivider } from "../components/theme/SectionDivider";
 import { TS } from "../libs/TranslationHelper";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogin } from "../store/actions/user.action";
@@ -87,6 +88,8 @@ export default function LoginScreen() {
             <CustomButton onClick={onSubmit} variant="primary" block>
               {TS.translate("auth", "login")}
             </CustomButton>
+
+            <SectionDivider>OR</SectionDivider>
           </Form>
         </div>
       </Login__.LoginBox>
