@@ -2,7 +2,10 @@ import { TextHelper } from "@project-boilerplate/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { apiAxios } from "../constants/axios.constants";
+import { showAlert } from "../store/actions/ui.action";
+import { store } from "../store/store";
 import { IAPIError } from "../types/api.types";
+import { TS } from "./TranslationHelper";
 
 export class APIHelper {
   public static async request<T>(
@@ -20,19 +23,32 @@ export class APIHelper {
     data?: object | null,
     authenticated = true
   ): Promise<AxiosResponse<T | IAPIError>> {
-    // if (authenticated) {
-    //   const userReducer = store.getState().userReducer;
+    // before even beginning our request, lets check if the user has internet
 
-    //   const { token } = userReducer.user;
-    //   return apiAxios.request<T>({
-    //     method,
-    //     url,
-    //     data,
-    //     headers: {
-    //       Authorization: `Bearer ${token}`,
-    //     },
-    //   });
-    // }
+    const online = window.navigator.onLine;
+
+    if (!online) {
+      store.dispatch(
+        showAlert(
+          TS.translate("global", "oops"),
+          TS.translate("global", "connectionError")
+        )
+      );
+    }
+
+    if (authenticated) {
+      const userReducer = store.getState().userReducer;
+
+      const { token } = userReducer.user;
+      return apiAxios.request<T>({
+        method,
+        url,
+        data,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
 
     return apiAxios.request<T>({ method, url, data });
   }
