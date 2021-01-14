@@ -25,6 +25,11 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
     case UserActionTypes.Clear:
       return initialState;
 
+    case UserActionTypes.RefreshInfo:
+      const user = action.payload;
+
+      return { ...state, user };
+
     case UserActionTypes.GoogleOAuthStoreToken:
       const { accessToken, refreshToken } = action.payload;
 

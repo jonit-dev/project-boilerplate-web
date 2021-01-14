@@ -24,11 +24,9 @@ let store: any;
 
 const makeStore = () => {
   if (isServer) {
-    console.log("Server store created...");
     //If it's on server side, create a store
     return createStore(rootReducer, applyMiddleware(...middlewares));
   } else {
-    console.log("Client store created...");
     // we need it only on client side
     const { persistStore, persistReducer } = require("redux-persist");
     const storage = require("redux-persist/lib/storage").default;

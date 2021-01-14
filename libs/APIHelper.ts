@@ -3,6 +3,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { apiAxios } from "../constants/axios.constants";
 import { showAlert } from "../store/actions/ui.action";
+import { IUserReducer } from "../store/reducers/user.reducer";
 import { store } from "../store/store";
 import { IAPIError } from "../types/api.types";
 import { TS } from "./TranslationHelper";
@@ -37,15 +38,15 @@ export class APIHelper {
     }
 
     if (authenticated) {
-      const userReducer = store.getState().userReducer;
+      const userReducer: IUserReducer = store.getState().userReducer;
 
-      const { token } = userReducer.user;
+      const accessToken = userReducer.auth.accessToken;
       return apiAxios.request<T>({
         method,
         url,
         data,
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       });
     }

@@ -3,10 +3,11 @@ import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
 import { IAPIError } from "../../types/api.types";
-import { IDispatchAlertShow } from "../../types/ui.types";
 import {
   IDispatchUserClear,
   IDispatchUserLogin,
+  IDispatchUserRefresh,
+  IUser,
   IUserCredentials,
   IUserLoginPayload,
   UserActionTypes,
@@ -14,12 +15,16 @@ import {
 import { showAlert } from "./ui.action";
 
 export const userLogin = (credentials: IUserCredentials) => async (
-  dispatch: Dispatch<IDispatchUserLogin | IDispatchAlertShow>
+  dispatch: Dispatch<
+    | IDispatchUserLogin
+    | ReturnType<typeof showAlert>
+    | ReturnType<typeof userRefreshInfo>
+  >
 ) => {
   try {
     const response = await APIHelper.apiRequest<IUserLoginPayload | IAPIError>(
       "POST",
-      "/auth/auth",
+      "/auth/login",
       credentials,
       false
     );
@@ -30,6 +35,8 @@ export const userLogin = (credentials: IUserCredentials) => async (
       type: UserActionTypes.Login,
       payload: loginSuccessPayload,
     });
+
+    dispatch(userRefreshInfo());
 
     Router.route = "/main";
   } catch (error) {
@@ -42,6 +49,30 @@ export const userLogin = (credentials: IUserCredentials) => async (
 
       dispatch(showAlert("Oops!", errorMessage));
     }
+  }
+};
+
+export const userRefreshInfo = () => async (
+  dispatch: Dispatch<IDispatchUserRefresh>
+) => {
+  try {
+    const response = await APIHelper.apiRequest<IUser>(
+      "GET",
+      "/users/self",
+      null,
+      true
+    );
+
+    const user = response.data as IUser;
+
+    if (user) {
+      dispatch({
+        type: UserActionTypes.RefreshInfo,
+        payload: user,
+      });
+    }
+  } catch (error) {
+    console.error(error);
   }
 };
 

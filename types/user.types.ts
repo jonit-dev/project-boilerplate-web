@@ -42,6 +42,11 @@ export interface IDispatchUserInfo {
   payload: IUser;
 }
 
+export interface IDispatchUserRefresh {
+  type: UserActionTypes.RefreshInfo;
+  payload: IUser;
+}
+
 export interface IDispatchUserLogin {
   type: UserActionTypes.Login;
   payload: IUserLoginPayload;
