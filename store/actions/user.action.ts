@@ -12,6 +12,7 @@ import {
   IUserLoginPayload,
   UserActionTypes,
 } from "../../types/user.types";
+import { isServer } from "../store";
 import { showAlert } from "./ui.action";
 
 export const userLogin = (credentials: IUserCredentials) => async (
@@ -85,9 +86,11 @@ export const userClearInfo = (): IDispatchUserClear => {
 };
 
 export const userLogout = (): IDispatchUserClear => {
-  console.log("Logging user out...");
-  if (!Router.route.includes("login")) {
-    Router.push("/auth");
+  if (!isServer) {
+    console.log("Logging user out...");
+    if (!Router.route.includes("login")) {
+      Router.push("/auth");
+    }
   }
 
   return {

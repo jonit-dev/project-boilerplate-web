@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import { Provider, useDispatch, useSelector, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import { clearAlert } from "../store/actions/ui.action";
+import { userRefreshInfo } from "../store/actions/user.action";
 import { StoreState } from "../store/reducers/index.reducer";
 import { IUserReducer } from "../store/reducers/user.reducer";
 import { wrapper } from "../store/store";
@@ -17,7 +17,7 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isLoggedIn } = useSelector<StoreState, IUserReducer>(
+  const { isLoggedIn, auth } = useSelector<StoreState, IUserReducer>(
     (state) => state.userReducer
   );
 
@@ -26,15 +26,23 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
     router.push("/main");
   }
 
-  useEffect(() => {
-    router.events.on("routeChangeStart", (url) => {
-      const state: StoreState = store.getState();
+  // check if user has accessToken. If so, refresh user info when app starts!
 
-      if (state.uiReducer.uiAlert !== null) {
-        dispatch(clearAlert());
-      }
-    });
-  }, []);
+  useEffect(() => {
+    if (auth?.accessToken) {
+      dispatch(userRefreshInfo());
+    }
+  }, [auth]);
+
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", (url) => {
+  //     const state: StoreState = store.getState();
+
+  //     if (state.uiReducer.uiAlert !== null) {
+  //       dispatch(clearAlert());
+  //     }
+  //   });
+  // }, []);
 
   return (
     <Provider store={store}>

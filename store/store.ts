@@ -10,7 +10,7 @@ declare global {
     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
   }
 }
-const isServer = typeof window === "undefined";
+export const isServer = typeof window === "undefined";
 
 const middlewares = [thunk];
 

@@ -1,8 +1,10 @@
 import { TextHelper } from "@project-boilerplate/shared";
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import Router from "next/router";
 
 import { apiAxios } from "../constants/axios.constants";
 import { showAlert } from "../store/actions/ui.action";
+import { userLogout } from "../store/actions/user.action";
 import { IUserReducer } from "../store/reducers/user.reducer";
 import { store } from "../store/store";
 import { IAPIError } from "../types/api.types";
@@ -38,17 +40,31 @@ export class APIHelper {
     }
 
     if (authenticated) {
-      const userReducer: IUserReducer = store.getState().userReducer;
+      try {
+        const userReducer: IUserReducer = store.getState().userReducer;
 
-      const accessToken = userReducer.auth.accessToken;
-      return apiAxios.request<T>({
-        method,
-        url,
-        data,
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+        const accessToken = userReducer.auth.accessToken;
+        return apiAxios.request<T>({
+          method,
+          url,
+          data,
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+      } catch (error) {
+        console.error(error);
+
+        store.dispatch(
+          showAlert(
+            TS.translate("auth", "pleaseLogin"),
+            TS.translate("auth", "couldntAuthenticate")
+          )
+        );
+        store.dispatch(userLogout());
+
+        Router.push("/auth");
+      }
     }
 
     return apiAxios.request<T>({ method, url, data });
