@@ -3,25 +3,18 @@ import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
 import { IDispatchUserGoogleOAuthStoreToken, UserActionTypes } from "../../types/user.types";
-import { userRefreshInfo } from "./user.action";
 
 export const userGoogleOAuthStoreToken = (
   accessToken: string,
   refreshToken?: string
-) => async (
-  dispatch: Dispatch<
-    IDispatchUserGoogleOAuthStoreToken | ReturnType<typeof userRefreshInfo>
-  >
-) => {
-  dispatch({
+): IDispatchUserGoogleOAuthStoreToken => {
+  return {
     type: UserActionTypes.GoogleOAuthStoreToken,
     payload: {
       accessToken,
       refreshToken,
     },
-  });
-
-  dispatch(userRefreshInfo());
+  };
 };
 
 export const getGoogleOAuthUrl = () => async (): Promise<

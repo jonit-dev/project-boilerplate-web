@@ -30,6 +30,7 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
 
   useEffect(() => {
     if (auth?.accessToken) {
+      console.log("_app.tsx => triggering userRefreshInfo()...");
       dispatch(userRefreshInfo());
     }
   }, [auth]);

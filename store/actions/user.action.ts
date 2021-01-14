@@ -12,15 +12,10 @@ import {
   IUserLoginPayload,
   UserActionTypes,
 } from "../../types/user.types";
-import { isServer } from "../store";
 import { showAlert } from "./ui.action";
 
 export const userLogin = (credentials: IUserCredentials) => async (
-  dispatch: Dispatch<
-    | IDispatchUserLogin
-    | ReturnType<typeof showAlert>
-    | ReturnType<typeof userRefreshInfo>
-  >
+  dispatch: Dispatch<IDispatchUserLogin | ReturnType<typeof showAlert>>
 ) => {
   try {
     const response = await APIHelper.apiRequest<IUserLoginPayload | IAPIError>(
@@ -36,8 +31,6 @@ export const userLogin = (credentials: IUserCredentials) => async (
       type: UserActionTypes.Login,
       payload: loginSuccessPayload,
     });
-
-    dispatch(userRefreshInfo());
 
     Router.route = "/main";
   } catch (error) {
@@ -86,11 +79,9 @@ export const userClearInfo = (): IDispatchUserClear => {
 };
 
 export const userLogout = (): IDispatchUserClear => {
-  if (!isServer) {
-    console.log("Logging user out...");
-    if (!Router.route.includes("login")) {
-      Router.push("/auth");
-    }
+  console.log("Logging user out...");
+  if (!Router.route.includes("login")) {
+    Router.push("/auth");
   }
 
   return {
