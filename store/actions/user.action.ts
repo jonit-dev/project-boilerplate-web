@@ -65,6 +65,8 @@ export const userRefreshInfo = () => async (
 
     const user = response.data as IUser;
 
+    console.log("refreshing user info");
+
     if (user) {
       dispatch({
         type: UserActionTypes.RefreshInfo,
