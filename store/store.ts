@@ -1,6 +1,5 @@
 import { createWrapper } from "next-redux-wrapper";
 import { applyMiddleware, compose, createStore } from "redux";
-import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 
 import { rootReducer } from "./reducers/index.reducer";
@@ -20,33 +19,39 @@ const composeEnhancers = isServer
   ? compose
   : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-// Client-side store requirements
+// Client-side store
+let store: any;
 
-const storage = require("redux-persist/lib/storage").default;
-
-const persistConfig = {
-  key: "root",
-  whitelist: ["userReducer"], // only counter will be persisted, add other reducers if needed
-  storage, // if needed, use a safer storage
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
-
-export const store: any = createStore(
-  persistedReducer,
-  composeEnhancers(applyMiddleware(...middlewares))
-); // Creating the store again
-
-store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
-
-const makeStore = ({ isServer }) => {
+const makeStore = () => {
   if (isServer) {
+    console.log("Server store created...");
     //If it's on server side, create a store
     return createStore(rootReducer, applyMiddleware(...middlewares));
   } else {
+    console.log("Client store created...");
+    // we need it only on client side
+    const { persistStore, persistReducer } = require("redux-persist");
+    const storage = require("redux-persist/lib/storage").default;
+
+    const persistConfig = {
+      key: "nextjs",
+      whitelist: ["userReducer"], // only counter will be persisted, add other reducers if needed
+      storage, // if needed, use a safer storage
+    };
+
+    const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
+
+    store = createStore(
+      persistedReducer,
+      composeEnhancers(applyMiddleware(...middlewares))
+    ); // Creating the store again
+
+    store.__persistor = persistStore(store); // This creates a persistor object & push that persisted object to .__persistor, so that we can avail the persistability feature
+
     return store;
   }
 };
 
-//@ts-expect-error error
 export const wrapper = createWrapper(makeStore);
+
+export { store };
