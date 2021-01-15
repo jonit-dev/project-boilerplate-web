@@ -14,9 +14,13 @@ export const CustomAlert: React.FC = (props) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(clearAlert());
-    }, 10000);
+    if (uiAlert) {
+      window.scrollTo(0, 0); // scroll to top when alert appears!
+
+      setTimeout(() => {
+        dispatch(clearAlert());
+      }, 10000);
+    }
   }, [uiAlert]);
 
   return (

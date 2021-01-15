@@ -6,4 +6,7 @@ export const app = {
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
     appUrl: process.env.NEXT_PUBLIC_APP_URL,
   },
+  form: {
+    phoneMask: process.env.NEXT_PUBLIC_APP_PHONE_MASK,
+  },
 };

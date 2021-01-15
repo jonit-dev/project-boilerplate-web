@@ -8,6 +8,7 @@ import { CustomAlert } from "../components/theme/CustomAlert";
 import { CustomButton } from "../components/theme/CustomButton";
 import { Input } from "../components/theme/form/Input";
 import { SectionDivider } from "../components/theme/SectionDivider";
+import { app } from "../constants/env";
 import { theme } from "../constants/theme";
 import { TS } from "../libs/TranslationHelper";
 import { ValidationHelper } from "../libs/ValidationHelper";
@@ -128,6 +129,7 @@ export default function RegisterScreen() {
               onChange={(e) =>
                 setNewUser({ ...newUser, phone: e.target.value })
               }
+              mask={app.form.phoneMask}
             />
 
             <Auth__.BottomOptionsContainer>
