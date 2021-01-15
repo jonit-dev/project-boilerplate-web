@@ -20,10 +20,18 @@ export const HeroSection: React.FC = () => {
               Our landing page template works on all devices, so you only have
               to set it up once, and get beautiful results forever.
             </p>
-            <div className="hero-form field field-grouped">
+            <div className="hero-form-wrapper hero-form field field-grouped">
+              {!isLoggedIn && (
+                <Link href={"/register"}>
+                  <button className="button button-primary button-block">
+                    Register
+                  </button>
+                </Link>
+              )}
+
               <Link href={isLoggedIn ? "/main" : "/auth"}>
-                <button className="button button-primary button-block">
-                  Login
+                <button className="button button-block">
+                  {isLoggedIn ? "Dashboard" : "Login"}
                 </button>
               </Link>
             </div>
