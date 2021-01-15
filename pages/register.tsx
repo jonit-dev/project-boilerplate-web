@@ -47,6 +47,7 @@ export default function RegisterScreen() {
         name: TS.translate("form", "name"),
         email: TS.translate("form", "email"),
         password: TS.translate("form", "password"),
+        passwordConfirmation: TS.translate("form", "passwordConfirmation"),
         address: TS.translate("form", "address"),
         phone: TS.translate("form", "phone"),
       },

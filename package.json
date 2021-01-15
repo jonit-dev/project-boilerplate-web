@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "yarn install && next start",
     "lint": "eslint .",
+    "update:shared-deps": "yarn upgrade --scope @project-boilerplate --latest",
     "lint:fix": "eslint . --fix"
   },
   "husky": {
@@ -40,7 +41,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.14",
-    "@project-boilerplate/shared": "^1.0.2",
+    "@project-boilerplate/shared": "^1.0.3",
     "@types/axios": "^0.14.0",
     "@types/next-redux-wrapper": "^3.0.0",
     "@types/node": "^14.14.20",
