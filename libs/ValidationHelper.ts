@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from "lodash";
 
 export interface IValidateKeyValueConfig {
   optionalFields: string[];
@@ -6,22 +6,26 @@ export interface IValidateKeyValueConfig {
 }
 
 export class ValidationHelper {
-  public static validateKeyValue = (
-    object: Object,
+  public static validateKeyValue(
+    targetObject: Object,
     config: IValidateKeyValueConfig
-  ) => {
+  ): string {
     let invalidFields = "";
 
-    for (const key of Object.keys(object)) {
+    for (const key of Object.keys(targetObject)) {
       // console.log(`Validating ... ${key}`);
       // loop through all key value pairs, except the optional ones
       if (!config.optionalFields.includes(key)) {
-        if (!object[key] || object[key] === "default" || !object[key].length) {
+        if (
+          !targetObject[key] ||
+          targetObject[key] === "default" ||
+          !targetObject[key].length
+        ) {
           const fieldLabel = config.fieldLabels[key];
           invalidFields += `${_.capitalize(fieldLabel)}, `;
         }
       }
     }
     return invalidFields.slice(0, invalidFields.length - 2);
-  };
+  }
 }

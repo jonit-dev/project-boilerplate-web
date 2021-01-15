@@ -109,7 +109,7 @@ export default function LoginScreen() {
               {TS.translate("auth", "login")}
             </CustomButton>
 
-            <SectionDivider>OR</SectionDivider>
+            <SectionDivider>{TS.translate("form", "or")}</SectionDivider>
 
             <CustomButton
               onClick={onSignInWithGoogle}
@@ -120,7 +120,7 @@ export default function LoginScreen() {
               iconSlot="start"
               block
             >
-              Sign in with Google
+              {TS.translate("auth", "signInWithGoogle")}
             </CustomButton>
           </Form>
         </div>

@@ -4,8 +4,9 @@ import { theme } from "../../constants/theme";
 import { Card__ } from "../components/card.styles";
 
 const Container = styled.div`
+  padding: 2rem 0 2rem;
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

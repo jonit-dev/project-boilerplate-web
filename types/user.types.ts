@@ -1,11 +1,13 @@
 export interface IUser {
-  id: number;
   name: string;
-  username: string;
   email: string;
   address?: string;
-  phone: string;
-  website: string;
+  phone?: string;
+}
+
+export interface INewUser extends IUser {
+  password: string;
+  passwordConfirmation: string;
 }
 
 export interface IUserCredentials {
