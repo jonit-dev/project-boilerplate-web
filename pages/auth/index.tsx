@@ -29,8 +29,9 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const accessToken = router.query.accessToken as string;
-    const errorType = router.query.accessToken as TranslationTypes;
-    const errorMessage = router.query.accessToken as string;
+    const errorType = router.query.errorType as TranslationTypes;
+    const errorMessage = router.query.errorMessage as string;
+    console.log(router);
 
     if (errorMessage) {
       dispatch(

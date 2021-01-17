@@ -37,17 +37,9 @@ export const userLogin = (credentials: IUserCredentials) => async (
       payload: loginSuccessPayload,
     });
 
-    Router.route = "/main";
+    Router.push("/main");
   } catch (error) {
-    // If it's a custom error message from the server, let's handle it!
-
-    if (error.response) {
-      const errorPayload = error.response.data as IAPIError;
-
-      const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
-
-      dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
-    }
+    console.log(error);
   }
 };
 
@@ -98,13 +90,7 @@ export const userRegister = (newUser: INewUser) => async (
       }, 3000);
     }
   } catch (error) {
-    if (error.response) {
-      const errorPayload = error.response.data as IAPIError;
-
-      const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
-
-      dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
-    }
+    console.log(error);
   }
 };
 
@@ -151,8 +137,6 @@ export const userLogout = (): IDispatchUserClear => {
   };
 };
 
-
-
 export const userForgotPassword = (email: string) => async (
   dispatch: Dispatch<
     | IDispatchUserForgotPassword
@@ -182,15 +166,9 @@ export const userForgotPassword = (email: string) => async (
       setTimeout(() => {
         dispatch(clearAlert());
         Router.push("/auth");
-      }, 3000);
+      }, 5000);
     }
   } catch (error) {
     console.error(error);
-
-    const errorPayload = error.response.data as IAPIError;
-
-    const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
-
-    dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
   }
 };

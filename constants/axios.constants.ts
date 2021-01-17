@@ -1,6 +1,7 @@
 import { HttpStatus } from "@project-boilerplate/shared/dist";
 import axios from "axios";
 
+import { APIHelper } from "../libs/APIHelper";
 import { TS } from "../libs/TranslationHelper";
 import { showAlert } from "../store/actions/ui.action";
 import { userLogout } from "../store/actions/user.action";
@@ -19,7 +20,6 @@ apiAxios.interceptors.response.use(
   },
   (error) => {
     // First check should be if the server is actually online. If not, show error and send him to login
-
     if (!error.response) {
       console.log("Connection error!");
       store.dispatch(
@@ -37,11 +37,12 @@ apiAxios.interceptors.response.use(
 
     // Then we start checking the message payload...
 
-    if (error.response.data) {
+    if (error.response) {
       const errorResponse: IAPIError = error.response.data;
 
       const userReducer: IUserReducer = store.getState().userReducer;
 
+      // Standard generic auth error messages
       if (userReducer.auth) {
         switch (errorResponse.statusCode) {
           case HttpStatus.Unauthorized:
@@ -62,6 +63,12 @@ apiAxios.interceptors.response.use(
             break;
         }
       }
+
+      // Custom error messages handling
+
+      const errorMessage = APIHelper.handleErrorMessage(errorResponse.message);
+
+      store.dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
     }
     return Promise.reject(error);
   }
