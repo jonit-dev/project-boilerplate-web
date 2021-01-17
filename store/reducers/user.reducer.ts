@@ -19,6 +19,11 @@ export const userReducer: Reducer<IUserReducer, UserAction> = (
   action
 ) => {
   switch (action.type) {
+    case UserActionTypes.Register:
+      const newUser = action.payload;
+
+      return { ...state, user: newUser };
+
     case UserActionTypes.Login:
       return { ...state, auth: action.payload, isLoggedIn: true };
 

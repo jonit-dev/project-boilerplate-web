@@ -1,22 +1,22 @@
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { TextHelper } from "@project-boilerplate/shared/dist";
+import { TextHelper, TranslationTypes } from "@project-boilerplate/shared/dist";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
-import { CustomAlert } from "../components/theme/CustomAlert";
-import { CustomButton } from "../components/theme/CustomButton";
-import { Input } from "../components/theme/form/Input";
-import { SectionDivider } from "../components/theme/SectionDivider";
-import { theme } from "../constants/theme";
-import { TS } from "../libs/TranslationHelper";
-import { getGoogleOAuthUrl, userGoogleOAuthStoreToken } from "../store/actions/oauth.actions";
-import { showAlert } from "../store/actions/ui.action";
-import { userLogin } from "../store/actions/user.action";
-import { Auth__ } from "../styles/pages/auth.styles";
-import { IUserCredentials } from "../types/user.types";
+import { CustomAlert } from "../../components/theme/CustomAlert";
+import { CustomButton } from "../../components/theme/CustomButton";
+import { Input } from "../../components/theme/form/Input";
+import { SectionDivider } from "../../components/theme/SectionDivider";
+import { theme } from "../../constants/theme";
+import { TS } from "../../libs/TranslationHelper";
+import { getGoogleOAuthUrl, userGoogleOAuthStoreToken } from "../../store/actions/oauth.actions";
+import { showAlert } from "../../store/actions/ui.action";
+import { userLogin } from "../../store/actions/user.action";
+import { Auth__ } from "../../styles/pages/auth.styles";
+import { IUserCredentials } from "../../types/user.types";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
@@ -29,9 +29,20 @@ export default function LoginScreen() {
 
   useEffect(() => {
     const accessToken = router.query.accessToken as string;
+    const errorType = router.query.accessToken as TranslationTypes;
+    const errorMessage = router.query.accessToken as string;
+
+    if (errorMessage) {
+      dispatch(
+        showAlert(
+          TS.translate("global", "oops"),
+          TS.translate(errorType, errorMessage)
+        )
+      );
+    }
 
     if (accessToken) {
-      dispatch(userGoogleOAuthStoreToken(accessToken));
+      dispatch(userGoogleOAuthStoreToken(String(accessToken)));
     }
   }, [router]);
 
@@ -97,10 +108,10 @@ export default function LoginScreen() {
             />
 
             <Auth__.BottomOptionsContainer>
-              <Link href="/register">
+              <Link href="/auth/register">
                 <small>{TS.translate("auth", "createYourAccount")}</small>
               </Link>
-              <Link href="/forgot-password">
+              <Link href="/auth/forgot-password">
                 <small>{TS.translate("auth", "forgotPassword")}</small>
               </Link>
             </Auth__.BottomOptionsContainer>

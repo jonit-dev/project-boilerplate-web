@@ -22,7 +22,7 @@ export const HeroSection: React.FC = () => {
             </p>
             <div className="hero-form-wrapper hero-form field field-grouped">
               {!isLoggedIn && (
-                <Link href={"/register"}>
+                <Link href={"/auth/register"}>
                   <button className="button button-primary button-block">
                     Register
                   </button>
@@ -30,7 +30,11 @@ export const HeroSection: React.FC = () => {
               )}
 
               <Link href={isLoggedIn ? "/main" : "/auth"}>
-                <button className="button button-block">
+                <button
+                  className={`button button-block ${
+                    isLoggedIn ? "button-primary" : null
+                  }`}
+                >
                   {isLoggedIn ? "Dashboard" : "Login"}
                 </button>
               </Link>

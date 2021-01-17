@@ -1,18 +1,23 @@
+import { HttpStatus } from "@project-boilerplate/shared/dist";
 import Router from "next/router";
 import { Dispatch } from "react";
 
 import { APIHelper } from "../../libs/APIHelper";
+import { TS } from "../../libs/TranslationHelper";
 import { IAPIError } from "../../types/api.types";
 import {
   IDispatchUserClear,
+  IDispatchUserForgotPassword,
   IDispatchUserLogin,
   IDispatchUserRefresh,
+  IDispatchUserRegister,
+  INewUser,
   IUser,
   IUserCredentials,
   IUserLoginPayload,
   UserActionTypes,
 } from "../../types/user.types";
-import { showAlert } from "./ui.action";
+import { clearAlert, showAlert } from "./ui.action";
 
 export const userLogin = (credentials: IUserCredentials) => async (
   dispatch: Dispatch<IDispatchUserLogin | ReturnType<typeof showAlert>>
@@ -41,7 +46,64 @@ export const userLogin = (credentials: IUserCredentials) => async (
 
       const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
 
-      dispatch(showAlert("Oops!", errorMessage));
+      dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
+    }
+  }
+};
+
+export const userRegister = (newUser: INewUser) => async (
+  dispatch: Dispatch<
+    | IDispatchUserRegister
+    | ReturnType<typeof userLogin>
+    | ReturnType<typeof showAlert>
+  >
+) => {
+  try {
+    const response = await APIHelper.apiRequest<INewUser>(
+      "POST",
+      "/auth/signup",
+      newUser,
+      false
+    );
+
+    // if user was created successfully...
+
+    if (response.status === HttpStatus.Created) {
+      const registeredUser = response.data as IUser;
+
+      await dispatch({
+        type: UserActionTypes.Register,
+        payload: registeredUser,
+      });
+
+      console.log("user created");
+
+      const credentials: IUserCredentials = {
+        email: newUser.email,
+        password: newUser.password,
+      };
+
+      await dispatch(userLogin(credentials));
+
+      dispatch(
+        showAlert(
+          TS.translate("global", "success"),
+          TS.translate("auth", "accountCreatedSuccessfully"),
+          "success"
+        )
+      );
+
+      setTimeout(() => {
+        Router.push("/main");
+      }, 3000);
+    }
+  } catch (error) {
+    if (error.response) {
+      const errorPayload = error.response.data as IAPIError;
+
+      const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
+
+      dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
     }
   }
 };
@@ -87,4 +149,46 @@ export const userLogout = (): IDispatchUserClear => {
   return {
     type: UserActionTypes.Clear,
   };
+};
+
+export const userForgotPassword = (email: string) => async (
+  dispatch: Dispatch<
+    | IDispatchUserForgotPassword
+    | ReturnType<typeof showAlert>
+    | ReturnType<typeof clearAlert>
+  >
+) => {
+  try {
+    const response = await APIHelper.apiRequest(
+      "POST",
+      "/users/forgot-password",
+      {
+        email,
+      },
+      false
+    );
+
+    if (response.status === HttpStatus.OK) {
+      dispatch(
+        showAlert(
+          TS.translate("global", "success"),
+          TS.translate("auth", "passwordRecoverySuccess"),
+          "success"
+        )
+      );
+
+      setTimeout(() => {
+        dispatch(clearAlert());
+        Router.push("/auth");
+      }, 3000);
+    }
+  } catch (error) {
+    console.error(error);
+
+    const errorPayload = error.response.data as IAPIError;
+
+    const errorMessage = APIHelper.handleErrorMessage(errorPayload.message);
+
+    dispatch(showAlert(TS.translate("global", "oops"), errorMessage));
+  }
 };

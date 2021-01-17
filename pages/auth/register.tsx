@@ -4,18 +4,19 @@ import React, { useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
-import { CustomAlert } from "../components/theme/CustomAlert";
-import { CustomButton } from "../components/theme/CustomButton";
-import { Input } from "../components/theme/form/Input";
-import { SectionDivider } from "../components/theme/SectionDivider";
-import { app } from "../constants/env";
-import { theme } from "../constants/theme";
-import { TS } from "../libs/TranslationHelper";
-import { ValidationHelper } from "../libs/ValidationHelper";
-import { getGoogleOAuthUrl } from "../store/actions/oauth.actions";
-import { showAlert } from "../store/actions/ui.action";
-import { Auth__ } from "../styles/pages/auth.styles";
-import { INewUser } from "../types/user.types";
+import { CustomAlert } from "../../components/theme/CustomAlert";
+import { CustomButton } from "../../components/theme/CustomButton";
+import { Input } from "../../components/theme/form/Input";
+import { SectionDivider } from "../../components/theme/SectionDivider";
+import { app } from "../../constants/env";
+import { theme } from "../../constants/theme";
+import { TS } from "../../libs/TranslationHelper";
+import { ValidationHelper } from "../../libs/ValidationHelper";
+import { getGoogleOAuthUrl } from "../../store/actions/oauth.actions";
+import { showAlert } from "../../store/actions/ui.action";
+import { userRegister } from "../../store/actions/user.action";
+import { Auth__ } from "../../styles/pages/auth.styles";
+import { INewUser } from "../../types/user.types";
 
 export default function RegisterScreen() {
   const dispatch = useDispatch();
@@ -31,15 +32,6 @@ export default function RegisterScreen() {
 
   const onSubmit = () => {
     console.log(newUser);
-
-    if (newUser.password !== newUser.passwordConfirmation) {
-      dispatch(
-        showAlert(
-          "Oops!",
-          "Sorry! The chosen password does not match with its confirmation. Please, try again."
-        )
-      );
-    }
 
     const invalidFields = ValidationHelper.validateKeyValue(newUser, {
       optionalFields: ["address", "phone"],
@@ -63,12 +55,14 @@ export default function RegisterScreen() {
       );
       return;
     }
+    dispatch(userRegister(newUser));
   };
 
   const onSignInWithGoogle = async () => {
-    const googleUrl = await dispatch(getGoogleOAuthUrl());
-    if (googleUrl) {
-      window.location.href = String(googleUrl);
+    const response = await dispatch(getGoogleOAuthUrl());
+
+    if (response) {
+      window.location.href = String(response);
     }
   };
 
