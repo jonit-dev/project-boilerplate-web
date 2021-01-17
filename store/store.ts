@@ -12,6 +12,7 @@ declare global {
 }
 export const isServer = typeof window === "undefined";
 
+// const middlewares = [thunk, logAction]; // you can add custom middlewares like logAction!
 const middlewares = [thunk];
 
 // Redux devtools
