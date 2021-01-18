@@ -10,6 +10,10 @@ export interface INewUser extends IUser {
   passwordConfirmation: string;
 }
 
+export interface IChangePasswords {
+  currentPassword: string;
+  newPassword: string;
+}
 export interface IUserCredentials {
   email: string;
   password: string;

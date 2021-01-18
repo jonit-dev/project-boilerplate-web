@@ -5,18 +5,23 @@ import { useState } from "react";
 import { Alert, Form } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 
+import { withAuth } from "../../components/HOC/withAuth";
 import { CustomAlert } from "../../components/theme/CustomAlert";
 import { CustomButton } from "../../components/theme/CustomButton";
 import { Input } from "../../components/theme/form/Input";
 import { TS } from "../../libs/TranslationHelper";
+import { ValidationHelper } from "../../libs/ValidationHelper";
 import { showAlert } from "../../store/actions/ui.action";
-import { userForgotPassword } from "../../store/actions/user.action";
 import { StoreState } from "../../store/reducers/index.reducer";
 import { IUIReducer } from "../../store/reducers/ui.reducer";
 import { Auth__ } from "../../styles/pages/auth.styles";
+import { IChangePasswords } from "../../types/user.types";
 
-export default function ForgotPasswordScreen(props) {
-  const [recoveryEmail, setRecoveryEmail] = useState<string>("");
+function ChangePasswordScreen(props) {
+  const [passwords, setPasswords] = useState<IChangePasswords>({
+    currentPassword: "",
+    newPassword: "",
+  });
 
   const { uiAlert } = useSelector<StoreState, IUIReducer>(
     (state) => state.uiReducer
@@ -25,24 +30,32 @@ export default function ForgotPasswordScreen(props) {
   const dispatch = useDispatch();
 
   const onSubmit = () => {
-    if (!recoveryEmail) {
+    const invalidFields = ValidationHelper.validateKeyValue(passwords, {
+      fieldLabels: {
+        currentPassword: "Current Password",
+        newPassword: "New Password",
+      },
+    });
+    if (invalidFields) {
       dispatch(
         showAlert(
-          TS.translate("global", "oops"),
-          TS.translate("validation", "isNotEmpty")
+          "Oops!",
+          TS.translate("form", "emptyFieldsError", {
+            invalidFields: invalidFields,
+          })
         )
       );
       return;
     }
 
-    dispatch(userForgotPassword(recoveryEmail));
+    console.log("changing passwords...");
   };
 
   return (
     <Auth__.Container>
       <Auth__.LoginBox>
         <Auth__.LoginTopContainer>
-          <h2>{TS.translate("auth", "forgotYourPassword")}</h2>
+          <h2>Change your Password</h2>
         </Auth__.LoginTopContainer>
 
         {uiAlert ? (
@@ -51,18 +64,36 @@ export default function ForgotPasswordScreen(props) {
           <Alert variant="info">
             <FontAwesomeIcon icon={faInfoCircle} />
             {"   "}
-            {TS.translate("auth", "forgotPasswordText")}
+            Please, type your current password and your chosen new password on
+            the fields below.
           </Alert>
         )}
 
         <div>
           <Form>
             <Input
-              id="forgot-password-email"
-              type="email"
-              label={TS.translate("form", "email")}
-              onChange={(e) => setRecoveryEmail(e.target.value)}
-              placeholder="The e-mail used to create your account"
+              id="change-password-old"
+              type="password"
+              label={"Current Password"}
+              onChange={(e) =>
+                setPasswords({
+                  ...passwords,
+                  currentPassword: e.target.value,
+                })
+              }
+              placeholder="Your current password..."
+            />
+            <Input
+              id="change-password-new"
+              type="password"
+              label={"New Password"}
+              onChange={(e) =>
+                setPasswords({
+                  ...passwords,
+                  newPassword: e.target.value,
+                })
+              }
+              placeholder="Your new password..."
             />
 
             <CustomButton onClick={onSubmit} variant="primary" block>
@@ -74,3 +105,5 @@ export default function ForgotPasswordScreen(props) {
     </Auth__.Container>
   );
 }
+
+export default withAuth(ChangePasswordScreen);

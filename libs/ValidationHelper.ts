@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 export interface IValidateKeyValueConfig {
-  optionalFields: string[];
+  optionalFields?: string[];
   fieldLabels: object;
 }
 
@@ -13,9 +13,8 @@ export class ValidationHelper {
     let invalidFields = "";
 
     for (const key of Object.keys(targetObject)) {
-      // console.log(`Validating ... ${key}`);
       // loop through all key value pairs, except the optional ones
-      if (!config.optionalFields.includes(key)) {
+      if (!config.optionalFields?.includes(key)) {
         if (
           !targetObject[key] ||
           targetObject[key] === "default" ||
