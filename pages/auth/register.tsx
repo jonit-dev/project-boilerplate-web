@@ -30,7 +30,8 @@ export default function RegisterScreen() {
     phone: "",
   });
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     console.log(newUser);
 
     const invalidFields = ValidationHelper.validateKeyValue(newUser, {
@@ -76,7 +77,7 @@ export default function RegisterScreen() {
         <CustomAlert />
 
         <div>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Input
               id="register-name"
               type="text"
@@ -133,7 +134,7 @@ export default function RegisterScreen() {
               </Link>
             </Auth__.BottomOptionsContainer>
 
-            <CustomButton onClick={onSubmit} variant="primary" block>
+            <CustomButton type="submit" variant="primary" block>
               {TS.translate("auth", "register")}
             </CustomButton>
 

@@ -47,7 +47,8 @@ export default function LoginScreen() {
     }
   }, [router]);
 
-  const onSubmit = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault();
     console.log(credentials);
 
     // check if all fields are not empty (front-end validation)
@@ -88,7 +89,7 @@ export default function LoginScreen() {
         <CustomAlert />
 
         <div>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Input
               id="login-email"
               type="email"
@@ -117,7 +118,7 @@ export default function LoginScreen() {
               </Link>
             </Auth__.BottomOptionsContainer>
 
-            <CustomButton onClick={onSubmit} variant="primary" block>
+            <CustomButton type="submit" variant="primary" block>
               {TS.translate("auth", "login")}
             </CustomButton>
 

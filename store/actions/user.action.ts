@@ -2,10 +2,12 @@ import { HttpStatus } from "@project-boilerplate/shared/dist";
 import Router from "next/router";
 import { Dispatch } from "react";
 
+import { app } from "../../constants/env";
 import { APIHelper } from "../../libs/APIHelper";
 import { TS } from "../../libs/TranslationHelper";
 import { IAPIError } from "../../types/api.types";
 import {
+  IChangePasswords,
   IDispatchUserClear,
   IDispatchUserForgotPassword,
   IDispatchUserLogin,
@@ -147,7 +149,7 @@ export const userForgotPassword = (email: string) => async (
   try {
     const response = await APIHelper.apiRequest(
       "POST",
-      "/users/forgot-password",
+      "/auth/forgot-password",
       {
         email,
       },
@@ -167,6 +169,48 @@ export const userForgotPassword = (email: string) => async (
         dispatch(clearAlert());
         Router.push("/auth");
       }, 5000);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const userChangePassword = (changePassword: IChangePasswords) => async (
+  dispatch: Dispatch<
+    | IDispatchUserLogin
+    | ReturnType<typeof showAlert>
+    | ReturnType<typeof userClearInfo>
+    | ReturnType<typeof clearAlert>
+  >
+) => {
+  try {
+    const response = await APIHelper.apiRequest(
+      "POST",
+      "/auth/change-password",
+      changePassword
+    );
+
+    if (response.status === HttpStatus.OK) {
+      dispatch(
+        showAlert(
+          TS.translate("global", "success"),
+          "Your password was changed successfully! Please, login again.",
+          "success"
+        )
+      );
+
+      setTimeout(() => {
+        dispatch(clearAlert());
+        dispatch(userClearInfo());
+        Router.push("/auth");
+      }, 3000);
+    } else {
+      dispatch(
+        showAlert(
+          TS.translate("global", "oops"),
+          `Something wrong happened while trying to change your password! Please, contact ${app.general.adminEmail} for more information.`
+        )
+      );
     }
   } catch (error) {
     console.error(error);

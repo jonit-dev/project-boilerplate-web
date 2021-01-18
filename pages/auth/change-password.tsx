@@ -12,6 +12,7 @@ import { Input } from "../../components/theme/form/Input";
 import { TS } from "../../libs/TranslationHelper";
 import { ValidationHelper } from "../../libs/ValidationHelper";
 import { showAlert } from "../../store/actions/ui.action";
+import { userChangePassword } from "../../store/actions/user.action";
 import { StoreState } from "../../store/reducers/index.reducer";
 import { IUIReducer } from "../../store/reducers/ui.reducer";
 import { Auth__ } from "../../styles/pages/auth.styles";
@@ -29,7 +30,8 @@ function ChangePasswordScreen(props) {
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     const invalidFields = ValidationHelper.validateKeyValue(passwords, {
       fieldLabels: {
         currentPassword: "Current Password",
@@ -49,13 +51,19 @@ function ChangePasswordScreen(props) {
     }
 
     console.log("changing passwords...");
+    dispatch(
+      userChangePassword({
+        currentPassword: passwords.currentPassword,
+        newPassword: passwords.newPassword,
+      })
+    );
   };
 
   return (
     <Auth__.Container>
       <Auth__.LoginBox>
         <Auth__.LoginTopContainer>
-          <h2>Change your Password</h2>
+          <h2>{TS.translate("auth", "changePassword")}</h2>
         </Auth__.LoginTopContainer>
 
         {uiAlert ? (
@@ -64,39 +72,38 @@ function ChangePasswordScreen(props) {
           <Alert variant="info">
             <FontAwesomeIcon icon={faInfoCircle} />
             {"   "}
-            Please, type your current password and your chosen new password on
-            the fields below.
+            {TS.translate("auth", "changePasswordInfoText")}
           </Alert>
         )}
 
         <div>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Input
               id="change-password-old"
               type="password"
-              label={"Current Password"}
+              label={TS.translate("form", "currentPassword")}
               onChange={(e) =>
                 setPasswords({
                   ...passwords,
                   currentPassword: e.target.value,
                 })
               }
-              placeholder="Your current password..."
+              placeholder={TS.translate("form", "currentPasswordPlaceholder")}
             />
             <Input
               id="change-password-new"
               type="password"
-              label={"New Password"}
+              label={TS.translate("form", "newPassword")}
               onChange={(e) =>
                 setPasswords({
                   ...passwords,
                   newPassword: e.target.value,
                 })
               }
-              placeholder="Your new password..."
+              placeholder={TS.translate("form", "newPasswordPlaceholder")}
             />
 
-            <CustomButton onClick={onSubmit} variant="primary" block>
+            <CustomButton type="submit" variant="primary" block>
               {TS.translate("form", "submit")}
             </CustomButton>
           </Form>

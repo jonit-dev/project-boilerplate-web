@@ -24,7 +24,8 @@ export default function ForgotPasswordScreen(props) {
 
   const dispatch = useDispatch();
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     if (!recoveryEmail) {
       dispatch(
         showAlert(
@@ -56,7 +57,7 @@ export default function ForgotPasswordScreen(props) {
         )}
 
         <div>
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Input
               id="forgot-password-email"
               type="email"
@@ -65,7 +66,7 @@ export default function ForgotPasswordScreen(props) {
               placeholder="The e-mail used to create your account"
             />
 
-            <CustomButton onClick={onSubmit} variant="primary" block>
+            <CustomButton type="submit" variant="primary" block>
               {TS.translate("form", "submit")}
             </CustomButton>
           </Form>

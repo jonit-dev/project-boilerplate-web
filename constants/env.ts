@@ -1,6 +1,7 @@
 export const app = {
   general: {
     env: process.env.NEXT_PUBLIC_ENV,
+    adminEmail: process.env.NEXT_PUBLIC_ADMIN_EMAIL,
     name: process.env.NEXT_PUBLIC_APP_NAME,
     language: process.env.NEXT_PUBLIC_APP_LANGUAGE,
     apiUrl: process.env.NEXT_PUBLIC_API_URL,
