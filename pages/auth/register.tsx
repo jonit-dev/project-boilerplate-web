@@ -83,7 +83,7 @@ export default function RegisterScreen() {
               type="text"
               label={TS.translate("form", "name")}
               onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-              placeholder="Your name"
+              placeholder={TS.translate("auth", "formInputNamePlaceholder")}
             />
 
             <Input
@@ -93,6 +93,7 @@ export default function RegisterScreen() {
               onChange={(e) =>
                 setNewUser({ ...newUser, email: e.target.value })
               }
+              placeholder={TS.translate("auth", "formInputEmailPlaceholder")}
             />
             <Input
               id="register-password"
@@ -101,6 +102,7 @@ export default function RegisterScreen() {
               onChange={(e) =>
                 setNewUser({ ...newUser, password: e.target.value })
               }
+              placeholder={TS.translate("auth", "formInputPasswordPlaceholder")}
             />
             <Input
               id="register-password-confirmation"
@@ -109,6 +111,10 @@ export default function RegisterScreen() {
               onChange={(e) =>
                 setNewUser({ ...newUser, passwordConfirmation: e.target.value })
               }
+              placeholder={TS.translate(
+                "auth",
+                "formInputPasswordConfirmationPlaceholder"
+              )}
             />
             <Input
               id="register-address"
@@ -117,6 +123,7 @@ export default function RegisterScreen() {
               onChange={(e) =>
                 setNewUser({ ...newUser, address: e.target.value })
               }
+              placeholder={TS.translate("auth", "formInputAddressPlaceholder")}
             />
             <Input
               id="register-phone"
@@ -126,6 +133,7 @@ export default function RegisterScreen() {
                 setNewUser({ ...newUser, phone: e.target.value })
               }
               mask={app.form.phoneMask}
+              placeholder={app.form.phoneMask.replaceAll("9", "X")}
             />
 
             <Auth__.BottomOptionsContainer>

@@ -63,7 +63,10 @@ export default function ForgotPasswordScreen(props) {
               type="email"
               label={TS.translate("form", "email")}
               onChange={(e) => setRecoveryEmail(e.target.value)}
-              placeholder="The e-mail used to create your account"
+              placeholder={TS.translate(
+                "form",
+                "forgotPasswordEmailPlaceholder"
+              )}
             />
 
             <CustomButton type="submit" variant="primary" block>

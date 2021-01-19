@@ -194,7 +194,7 @@ export const userChangePassword = (changePassword: IChangePasswords) => async (
       dispatch(
         showAlert(
           TS.translate("global", "success"),
-          "Your password was changed successfully! Please, login again.",
+          TS.translate("email", "passwordChangeSuccess"),
           "success"
         )
       );

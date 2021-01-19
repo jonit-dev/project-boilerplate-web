@@ -34,8 +34,8 @@ function ChangePasswordScreen(props) {
     e.preventDefault();
     const invalidFields = ValidationHelper.validateKeyValue(passwords, {
       fieldLabels: {
-        currentPassword: "Current Password",
-        newPassword: "New Password",
+        currentPassword: TS.translate("form", "currentPassword"),
+        newPassword: TS.translate("form", "newPassword"),
       },
     });
     if (invalidFields) {
@@ -50,7 +50,6 @@ function ChangePasswordScreen(props) {
       return;
     }
 
-    console.log("changing passwords...");
     dispatch(
       userChangePassword({
         currentPassword: passwords.currentPassword,
