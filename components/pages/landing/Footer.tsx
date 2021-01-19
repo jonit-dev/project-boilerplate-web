@@ -1,5 +1,7 @@
+import Link from "next/link";
 import React from "react";
 
+import { appEnv } from "../../../constants/appEnv";
 import { Logo } from "../../theme/Logo";
 
 export const Footer: React.FC = (props) => {
@@ -12,16 +14,12 @@ export const Footer: React.FC = (props) => {
           </div>
           <ul className="footer-links list-reset">
             <li>
-              <a href="#">Contact</a>
+              <Link href={`mailto:${appEnv.general.adminEmail}`}>Contact</Link>
             </li>
             <li>
-              <a href="#">About us</a>
-            </li>
-            <li>
-              <a href="#">FAQ's</a>
-            </li>
-            <li>
-              <a href="#">Support</a>
+              <Link href={`/legal/terms/${appEnv.general.language}`}>
+                Terms of Use
+              </Link>
             </li>
           </ul>
           <ul className="footer-social-links list-reset">

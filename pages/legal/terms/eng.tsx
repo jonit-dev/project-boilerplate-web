@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { InternalPage } from "../../components/theme/InternalPage";
-import { appEnv } from "../../constants/appEnv";
+import { InternalPage } from "../../../components/theme/InternalPage";
+import { appEnv } from "../../../constants/appEnv";
 
 export default function TermsOfUseScreen() {
   return (
@@ -18,7 +18,7 @@ export default function TermsOfUseScreen() {
         website as well as any related applications (the Site).
       </p>
       <p>
-        The Site provides the following services: {appEnv.general.description}
+        The Site provides the following services: "{appEnv.general.description}"
         (Services). You agree that by accessing the Site and/or Services, you
         have read, understood, and agree to be bound by all of these Terms and
         Conditions. If you do not agree with all of these Terms and Conditions,
@@ -82,31 +82,29 @@ export default function TermsOfUseScreen() {
 
       <h4>3. Information you provide to us</h4>
 
-      <p>
-        3.1 You represent and warrant that:
-        <ul>
-          <li>
-            (a) all registration information you submit will be true, accurate,
-            current, and complete and relate to you and not a third party;
-          </li>
-          <li>
-            (b) you will maintain the accuracy of such information and promptly
-            update such information as necessary;
-          </li>
-          <li>
-            (c) you will keep your password confidential and will be responsible
-            for all use of your password and account;
-          </li>
-          <li>
-            (d) you have the legal capacity and you agree to comply with these
-            Terms and Conditions; and
-          </li>
-          <li>
-            (e) you are not a minor in the jurisdiction in which you reside, or
-            if a minor, you have received parental permission to use the Site.
-          </li>
-        </ul>
-      </p>
+      <p>3.1 You represent and warrant that:</p>
+      <ul>
+        <li>
+          (a) all registration information you submit will be true, accurate,
+          current, and complete and relate to you and not a third party;
+        </li>
+        <li>
+          (b) you will maintain the accuracy of such information and promptly
+          update such information as necessary;
+        </li>
+        <li>
+          (c) you will keep your password confidential and will be responsible
+          for all use of your password and account;
+        </li>
+        <li>
+          (d) you have the legal capacity and you agree to comply with these
+          Terms and Conditions; and
+        </li>
+        <li>
+          (e) you are not a minor in the jurisdiction in which you reside, or if
+          a minor, you have received parental permission to use the Site.
+        </li>
+      </ul>
 
       <p>
         If you know or suspect that anyone other than you knows your user
@@ -248,33 +246,30 @@ export default function TermsOfUseScreen() {
 
       <h4>7. Site Management</h4>
 
-      <p>
-        7.1 We reserve the right at our sole discretion, to:
-        <ul>
-          <li>
-            (1) monitor the Site for breaches of these Terms and Conditions;
-          </li>
-          <li>
-            (2) take appropriate legal action against anyone in breach of
-            applicable laws or these Terms and Conditions;
-          </li>
-          <li>
-            (3) refuse, restrict access to or availability of, or disable (to
-            the extent technologically feasible) any of your Contributions;
-          </li>
-          <li>
-            (4) remove from the Site or otherwise disable all files and content
-            that are excessive in size or are in any way a burden to our
-            systems; and{" "}
-          </li>
-          <li>
-            (5) otherwise manage the Site in a manner designed to protect our
-            rights and property and to facilitate the proper functioning of the
-            Site and Services.
-          </li>
-        </ul>
-      </p>
-
+      <p>7.1 We reserve the right at our sole discretion, to:</p>
+      <ul>
+        <li>
+          (1) monitor the Site for breaches of these Terms and Conditions;
+        </li>
+        <li>
+          (2) take appropriate legal action against anyone in breach of
+          applicable laws or these Terms and Conditions;
+        </li>
+        <li>
+          (3) refuse, restrict access to or availability of, or disable (to the
+          extent technologically feasible) any of your Contributions;
+        </li>
+        <li>
+          (4) remove from the Site or otherwise disable all files and content
+          that are excessive in size or are in any way a burden to our systems;
+          and{" "}
+        </li>
+        <li>
+          (5) otherwise manage the Site in a manner designed to protect our
+          rights and property and to facilitate the proper functioning of the
+          Site and Services.
+        </li>
+      </ul>
       <p>
         7.2 We do not guarantee that the Site will be secure or free from bugs
         or viruses.
