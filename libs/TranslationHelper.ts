@@ -1,6 +1,6 @@
 import { TranslationTypes } from "@project-boilerplate/shared";
 
-import { app } from "../constants/env";
+import { appEnv } from "../constants/env";
 
 interface IInterpolationObjs {
   [key: string]: string;
@@ -12,7 +12,7 @@ export class TS {
     key: string,
     interpolationObjs?: IInterpolationObjs
   ) {
-    const envLang = app.general.language!;
+    const envLang = appEnv.general.language!;
 
     const jsonFile = require(`../node_modules/@project-boilerplate/shared/src/translations/${context}.lang.json`);
 

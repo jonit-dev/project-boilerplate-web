@@ -8,10 +8,10 @@ import { userLogout } from "../store/actions/user.action";
 import { IUserReducer } from "../store/reducers/user.reducer";
 import { store } from "../store/store";
 import { IAPIError } from "../types/api.types";
-import { app } from "./env";
+import { appEnv } from "./env";
 
 const apiAxios = axios.create({
-  baseURL: app.general.apiUrl,
+  baseURL: appEnv.general.apiUrl,
 });
 
 apiAxios.interceptors.response.use(

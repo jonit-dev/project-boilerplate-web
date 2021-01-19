@@ -1,4 +1,4 @@
-export const app = {
+export const appEnv = {
   general: {
     env: process.env.NEXT_PUBLIC_ENV,
     adminEmail: process.env.NEXT_PUBLIC_ADMIN_EMAIL,

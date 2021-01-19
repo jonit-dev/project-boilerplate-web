@@ -2,7 +2,7 @@ import { HttpStatus } from "@project-boilerplate/shared/dist";
 import Router from "next/router";
 import { Dispatch } from "react";
 
-import { app } from "../../constants/env";
+import { appEnv } from "../../constants/env";
 import { APIHelper } from "../../libs/APIHelper";
 import { TS } from "../../libs/TranslationHelper";
 import { IAPIError } from "../../types/api.types";
@@ -209,7 +209,7 @@ export const userChangePassword = (changePassword: IChangePasswords) => async (
         showAlert(
           TS.translate("global", "oops"),
           TS.translate("auth", "changePasswordGenericError", {
-            adminEmail: app.general.adminEmail,
+            adminEmail: appEnv.general.adminEmail,
           })
         )
       );

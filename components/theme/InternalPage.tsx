@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 import { Pages__ } from "../../styles/components/page.styles";
 import { Footer } from "../pages/landing/Footer";
 import { Header } from "../pages/landing/Header";
 
 interface IProps {
-  children?: React.ReactElement;
+  children?: React.ReactNode;
 }
 
 export const InternalPage: React.FC<IProps> = ({ children }) => {
