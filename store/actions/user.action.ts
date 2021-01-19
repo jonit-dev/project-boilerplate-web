@@ -208,7 +208,9 @@ export const userChangePassword = (changePassword: IChangePasswords) => async (
       dispatch(
         showAlert(
           TS.translate("global", "oops"),
-          `Something wrong happened while trying to change your password! Please, contact ${app.general.adminEmail} for more information.`
+          TS.translate("auth", "changePasswordGenericError", {
+            adminEmail: app.general.adminEmail,
+          })
         )
       );
     }
