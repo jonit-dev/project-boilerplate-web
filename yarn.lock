@@ -348,10 +348,10 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.6.0.tgz#f022195afdfc942e088ee2101285a1d31c7d727f"
   integrity sha512-cPqjjzuFWNK3BSKLm0abspP0sp/IGOli4p5I5fKFAzdS8fvjdOwDCfZqAaIiXd9lPkOWi3SUUfZof3hEb7J/uw==
 
-"@project-boilerplate/shared@^1.0.14":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@project-boilerplate/shared/-/shared-1.0.14.tgz#88a4721bd30f50f4364c01ccb4218273c9bf2e08"
-  integrity sha512-H1ofcPr8jz8Gz8+Z0d+GFb6WmP1XAt1LLnacs8hxKYQdvvOyehTO0de7GVGRRBDVgFJNrjoFIzFvXoi6majnQg==
+"@project-boilerplate/shared@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@project-boilerplate/shared/-/shared-1.0.15.tgz#14920ef03bfd945686ec6ef7ed793d82b7416a6e"
+  integrity sha512-eFozZHLNuoPH7SzTG/3GFyP/55k7fM+MOx0aBjdYhvrwLf5QZxU+9CEA8IL/agRK8CteKgNr2HwMYmQGwIcR2Q==
 
 "@restart/context@^2.1.4":
   version "2.1.4"
