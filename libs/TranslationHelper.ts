@@ -1,6 +1,6 @@
 import { TranslationTypes } from "@project-boilerplate/shared";
 
-import { appEnv } from "../constants/env";
+import { appEnv } from "../constants/appEnv";
 
 interface IInterpolationObjs {
   [key: string]: string;

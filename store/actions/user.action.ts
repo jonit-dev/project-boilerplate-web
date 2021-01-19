@@ -2,7 +2,7 @@ import { HttpStatus } from "@project-boilerplate/shared/dist";
 import Router from "next/router";
 import { Dispatch } from "react";
 
-import { appEnv } from "../../constants/env";
+import { appEnv } from "../../constants/appEnv";
 import { APIHelper } from "../../libs/APIHelper";
 import { TS } from "../../libs/TranslationHelper";
 import { IAPIError } from "../../types/api.types";

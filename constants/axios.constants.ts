@@ -8,7 +8,7 @@ import { userLogout } from "../store/actions/user.action";
 import { IUserReducer } from "../store/reducers/user.reducer";
 import { store } from "../store/store";
 import { IAPIError } from "../types/api.types";
-import { appEnv } from "./env";
+import { appEnv } from "./appEnv";
 
 const apiAxios = axios.create({
   baseURL: appEnv.general.apiUrl,

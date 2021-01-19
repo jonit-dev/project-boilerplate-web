@@ -1,5 +1,5 @@
 import { InternalPage } from "../../components/theme/InternalPage";
-import { appEnv } from "../../constants/env";
+import { appEnv } from "../../constants/appEnv";
 
 export default function TermsOfUseScreen() {
   return (

@@ -7,7 +7,7 @@ import { Header } from "../components/pages/landing/Header";
 import { HeroSection } from "../components/pages/landing/HeroSection";
 import { NewsletterSection } from "../components/pages/landing/NewsletterSection";
 import { TestimonialsSection } from "../components/pages/landing/TestimonialsSection";
-import { appEnv } from "../constants/env";
+import { appEnv } from "../constants/appEnv";
 
 export default function IndexScreen() {
   return (

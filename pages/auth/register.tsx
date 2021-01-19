@@ -8,7 +8,7 @@ import { CustomAlert } from "../../components/theme/CustomAlert";
 import { CustomButton } from "../../components/theme/CustomButton";
 import { Input } from "../../components/theme/form/Input";
 import { SectionDivider } from "../../components/theme/SectionDivider";
-import { appEnv } from "../../constants/env";
+import { appEnv } from "../../constants/appEnv";
 import { theme } from "../../constants/theme";
 import { TS } from "../../libs/TranslationHelper";
 import { ValidationHelper } from "../../libs/ValidationHelper";
