@@ -7,6 +7,9 @@ export default function TermsOfUseScreen() {
   return (
     <InternalPage>
       <h2> Termos e Condições </h2>
+
+      <p>Revisada em 20 Janeiro, 2021</p>
+
       <h4> 1. Acordo com os termos </h4>
       <p>
         1.1 Estes Termos e Condições constituem um acordo legalmente vinculativo
@@ -466,10 +469,10 @@ export default function TermsOfUseScreen() {
         do Site ou Serviços.
       </p>
       <p>
-        12.8 As seguintes são marcas registradas de {appEnv.general.company}. Tu
-        es não é permitido usá-los sem nossa aprovação, a menos que façam parte
-        de material nosso site afirma explicitamente que você tem permissão para
-        usar.
+        12.8 As seguintes são marcas registradas de {appEnv.general.corporation}
+        . Tu es não é permitido usá-los sem nossa aprovação, a menos que façam
+        parte de material nosso site afirma explicitamente que você tem
+        permissão para usar.
       </p>
       <p>
         12.9 Uma pessoa que não seja parte destes Termos e Condições deverá não
@@ -481,7 +484,7 @@ export default function TermsOfUseScreen() {
         mais informações sobre o uso dos Serviços, por favor entre em contato
         conosco por e-mail em {appEnv.general.adminEmail} ou por correio para:{" "}
         {""}
-        {appEnv.general.address}, {appEnv.general.company}, {""}
+        {appEnv.general.address}, {appEnv.general.corporation}, {""}
         {appEnv.general.country} - {appEnv.general.zipCode}
       </p>
     </InternalPage>

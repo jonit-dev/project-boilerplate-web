@@ -7,6 +7,9 @@ export default function TermsOfUseScreen() {
   return (
     <InternalPage>
       <h2>Terms and Conditions</h2>
+
+      <p>Revised in January 20, 2021</p>
+
       <h4>1. Agreement to Terms</h4>
       <p>
         1.1 These Terms and Conditions constitute a legally binding agreement
@@ -507,9 +510,9 @@ export default function TermsOfUseScreen() {
       </p>
 
       <p>
-        12.8 The following are trade marks of {appEnv.general.company}. You are
-        not permitted to use them without our approval, unless they are part of
-        material our Site explicitly states you are permitted to use.
+        12.8 The following are trade marks of {appEnv.general.corporation}. You
+        are not permitted to use them without our approval, unless they are part
+        of material our Site explicitly states you are permitted to use.
       </p>
 
       <p>
@@ -522,7 +525,7 @@ export default function TermsOfUseScreen() {
         12.10 In order to resolve a complaint regarding the Services or to
         receive further information regarding use of the Services, please
         contact us by email at {appEnv.general.adminEmail} or by post to:{" "}
-        {appEnv.general.address}, {appEnv.general.company},{" "}
+        {appEnv.general.address}, {appEnv.general.corporation},{" "}
         {appEnv.general.country} - {appEnv.general.zipCode}
       </p>
     </InternalPage>
