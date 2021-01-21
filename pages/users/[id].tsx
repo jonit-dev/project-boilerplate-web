@@ -10,7 +10,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const users = res.data as IUser[];
 
-  const paths = users.map((user) => `/users/${user.id}`);
+  const paths = users.map((user) => `/users/${user.name}`);
 
   return {
     paths,

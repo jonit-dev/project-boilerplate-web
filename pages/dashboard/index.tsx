@@ -3,10 +3,11 @@ import Head from "next/head";
 import { withAuth } from "../../components/HOC/withAuth";
 import { Area } from "../../components/pages/dashboard/Area";
 import { DashboardCard } from "../../components/pages/dashboard/DashboardCard";
+import { DashboardFooter } from "../../components/pages/dashboard/DashboardFooter";
 import { DashboardProgressBar } from "../../components/pages/dashboard/DashboardProgressBar";
 import { PageHeading } from "../../components/pages/dashboard/PageHeading";
 import { SideBar } from "../../components/pages/dashboard/SideBar";
-import { TopBar } from "../../components/pages/dashboard/TopBar";
+import { TopBar } from "../../components/pages/dashboard/TopBar/TopBar";
 import { appEnv } from "../../constants/appEnv";
 
 function DashboardScreen() {
@@ -158,15 +159,7 @@ function DashboardScreen() {
                 </div>
               </div>
             </div>
-            {/* Footer */}
-            <footer className="sticky-footer bg-white">
-              <div className="container my-auto">
-                <div className="copyright text-center my-auto">
-                  <span>Copyright © Your Website 2020</span>
-                </div>
-              </div>
-            </footer>
-            {/* End of Footer */}
+            <DashboardFooter />
           </div>
           {/* End of Content Wrapper */}
         </div>
