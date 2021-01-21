@@ -2,7 +2,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import React from "react";
-import { Button, ButtonProps } from "react-bootstrap-v5";
+import { Button, ButtonProps } from "react-bootstrap";
 
 import { Button__ } from "../../styles/components/button.styles";
 
