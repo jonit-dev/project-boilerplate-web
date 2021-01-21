@@ -38,7 +38,7 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
         </Head>
-        <body className="is-boxed has-animations">
+        <body className="is-boxed has-animations" id="page-top">
           <Main />
           <NextScript />
         </body>

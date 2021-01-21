@@ -1,3 +1,11 @@
+// Custom variables goes before bootstrap importing
+@import "./dashboard/variables";
+@import "./custom/variables";
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
 @import "./landing/landing.scss";
+
+@import "./dashboard/sb-admin-2.scss";
 
 @import "./custom/theme.scss";
