@@ -34,6 +34,9 @@ export const NavAlertItem: React.FC<IProps> = ({
         <h6 className="dropdown-header">{label}</h6>
 
         {children}
+        <a className="dropdown-item text-center small text-gray-500" href="#">
+          Read More Messages
+        </a>
       </div>
     </li>
   );

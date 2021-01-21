@@ -1,15 +1,15 @@
 interface IProps {
-  date: string;
-  text: string;
+  title: string;
+  body: string;
   icon: React.ReactNode;
   variant?: string;
   isBold: boolean;
 }
 
-export const NavAlertItemOption: React.FC<IProps> = ({
+export const NavAlertOptionIcon: React.FC<IProps> = ({
   variant = "primary",
-  date,
-  text,
+  title,
+  body,
   icon,
   isBold,
 }) => {
@@ -19,9 +19,9 @@ export const NavAlertItemOption: React.FC<IProps> = ({
         <div className={`icon-circle bg-${variant}`}>{icon}</div>
       </div>
       <div>
-        <div className="small text-gray-500">{date}</div>
+        <div className="small text-gray-500">{title}</div>
         <span className={isBold === true ? "font-weight-bold" : null}>
-          {text}
+          {body}
         </span>
       </div>
     </a>
