@@ -5,7 +5,6 @@ import React, { useEffect } from "react";
 import { Provider, useDispatch, useSelector, useStore } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import { clearAlert } from "../store/actions/ui.action";
 import { userRefreshInfo } from "../store/actions/user.action";
 import { StoreState } from "../store/reducers/index.reducer";
 import { IUserReducer } from "../store/reducers/user.reducer";
@@ -36,15 +35,15 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
     }
   }, [auth]);
 
-  useEffect(() => {
-    router.events.on("routeChangeStart", (url) => {
-      const state: StoreState = store.getState();
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", (url) => {
+  //     const state: StoreState = store.getState();
 
-      if (state.uiReducer.uiAlert !== null) {
-        dispatch(clearAlert());
-      }
-    });
-  }, []);
+  //     if (state.uiReducer.uiAlert !== null) {
+  //       dispatch(clearAlert());
+  //     }
+  //   });
+  // }, []);
 
   return (
     <Provider store={store}>
