@@ -16,5 +16,5 @@
     "downlevelIteration": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "store/store.ts"],
-  "exclude": ["node_modules", "./public"]
+  "exclude": ["node_modules", "public/**/*"]
 }
