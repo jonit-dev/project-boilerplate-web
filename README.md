@@ -2,6 +2,8 @@
 
 Please refer to Project Boilerplate API README instructions.
 
+[Video](https://youtu.be/6b4eUkXB81A)
+
 ## Troubleshooting
 
 - If you're getting a yarn permission error while trying to run docker-compose: Error: EACCES: permission denied, open '/root/.config/yarn'
