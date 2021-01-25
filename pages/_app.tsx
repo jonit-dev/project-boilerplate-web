@@ -17,7 +17,7 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   const store: any = useStore();
   const dispatch = useDispatch();
   const router = useRouter();
-  const { isLoggedIn, auth } = useSelector<StoreState, IUserReducer>(
+  const { isLoggedIn, auth, user } = useSelector<StoreState, IUserReducer>(
     (state) => state.userReducer
   );
 
@@ -29,7 +29,7 @@ export default wrapper.withRedux(({ Component, pageProps }) => {
   // check if user has accessToken. If so, refresh user info when app starts!
 
   useEffect(() => {
-    if (auth?.accessToken) {
+    if (user && auth?.accessToken) {
       console.log("_app.tsx => triggering userRefreshInfo()...");
       dispatch(userRefreshInfo());
     }

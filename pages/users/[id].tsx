@@ -1,6 +1,6 @@
 import axios from "axios";
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/dist/client/router";
+import { useRouter } from "next/router";
 
 import { IUser } from "../../types/user.types";
 
@@ -20,6 +20,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { id } = params;
+  console.log(params);
 
   const res = await axios.get(
     `https://jsonplaceholder.typicode.com/users/${id}`
